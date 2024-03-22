@@ -26,6 +26,7 @@
         }
     }
     ~~~
+
  2. Configurare il file UserController: creare una classe che utilizzi i metodi della classe UserModel e che li metta in una variabile utilizzabile anche dal file UserView
     ~~~php
     require_once("Model/UserModel.php");
@@ -37,6 +38,7 @@
         }
     }
     ~~~
+
 3. Configurare in fine il file UserView: creare il file html (php) per visualizzare le variabili salvate dallo UserController
     ~~~html
     <!DOCTYPE html>
@@ -56,4 +58,17 @@
         </ul>
     </body>
     </html>
+    ~~~
+
+4. Nell'Index non ho ben capito cosa bisogni fare, credo che alla fine serva solo per dare delle informazioni aggiuntive per la connessione al DataBase e per connettere tra di loro i files
+
+    ~~~php
+    require_once("Controller/UserController.php");
+   
+    $request = $_SERVER['REQUEST_URI'];
+    if($request == "/Iacobelli/")
+    {
+        $userController =new UserController();
+        $userController -> index();
+    }
     ~~~
