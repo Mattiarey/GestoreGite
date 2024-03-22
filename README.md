@@ -13,8 +13,7 @@
  Per quanto riguarda il DataBase la prof non ha detto nulla di particolare, in quanto rimane salvato su XAMPP, però nel dubbio salverei anche la "costruzione del database" in un txt dentro la cartella Model
  ## Elenco di cose da fare per configurare una base
  1. Configurare il file UserModel: creare una classe per connettersi al DataBase
-    ~~~
-    <?php
+    ~~~php
     class UserModel {
         private $db;
         public function __construct() {
@@ -26,11 +25,9 @@
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }
     }
-    ?>  
     ~~~
  2. Configurare il file UserController: creare una classe che utilizzi i metodi della classe UserModel e che li metta in una variabile utilizzabile anche dal file UserView
-    ~~~
-    <?php
+    ~~~php
     require_once("Model/UserModel.php");
     class UserController {
         public function index() {
@@ -39,10 +36,9 @@
             include 'View/user_view.php';
         }
     }
-    ?>
     ~~~
 3. Configurare in fine il file UserView: creare il file html (php) per visualizzare le variabili salvate dallo UserController
-    ~~~
+    ~~~html
     <!DOCTYPE html>
     <html lang="it">
     <head>
