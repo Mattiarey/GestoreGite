@@ -1,5 +1,5 @@
 # GestoreGite
- Compito su MVC di TPSIT marzo 2024
+ Compito su MVC di TPSIT Marzo 2024
 
  ## Istruzioni per capire bene come funzionano tutte queste strane cartelle
   **Model** è la cartella che contiene i metodi di accesso al database, quindi i files php che contengono le varie classi con relativi metodi.
@@ -27,4 +27,37 @@
         }
     }
     ?>  
+    ~~~
+ 2. Configurare il file UserController: creare una classe che utilizzi i metodi della classe UserModel e che li metta in una variabile utilizzabile anche dal file UserView
+    ~~~
+    <?php
+    require_once("Model/UserModel.php");
+    class UserController {
+        public function index() {
+            $userModel = new UserModel();
+            $users = $userModel->getUsers();
+            include 'View/user_view.php';
+        }
+    }
+    ?>
+    ~~~
+3. Configurare in fine il file UserView: creare il file html (php) per visualizzare le variabili salvate dallo UserController
+    ~~~
+    <!DOCTYPE html>
+    <html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lista utenti</title>
+    </head>
+    <body>
+        <h1>Lista Utenti</h1>
+        <ul>
+            <?php foreach ($users as $user): ?>
+                <li><?= $user['nome'] ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </body>
+    </html>
     ~~~
