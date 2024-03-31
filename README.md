@@ -72,3 +72,8 @@
         $userController -> index();
     }
     ~~~
+
+## Problemi che mi vengono in testa mentre scrivo il codice
+* Si possono creare più utenti con la stessa mail e password, potrebbe essere necessario mettere un check per la stessa mail
+* Non so bene come gestire l'account con poteri da Admin
+* Non so se creare un oggeto per tenere salvati i dati dell'utente loggato oppure se metterli nei cookies

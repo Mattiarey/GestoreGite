@@ -5,5 +5,7 @@ $request = $_SERVER['REQUEST_URI'];
 if($request == "/GestoreGite/")
 {
     $userController = new UserController();
+    #$userController -> aggiungiGino();
+    #$userController -> cercaGino();
     $userController -> index();
 }
