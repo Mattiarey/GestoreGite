@@ -7,5 +7,6 @@ if($request == "/GestoreGite/")
     $userController = new UserController();
     #$userController -> aggiungiGino();
     #$userController -> cercaGino();
+    #$userController -> eliminaGino();
     $userController -> index();
 }

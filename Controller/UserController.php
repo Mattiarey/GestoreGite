@@ -14,4 +14,8 @@ class UserController {
         $userModel = new UserModel();
         $userModel->checkUser("ginoCarlo@virgilio.it", "1234");
     }
+    public function eliminaGino(){
+        $userModel = new UserModel();
+        $userModel->eliminaUser("ginoCarlo@virgilio.it", "1234");
+    }
 }
