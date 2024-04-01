@@ -12,8 +12,8 @@ class GitaModel
     public function creaGita($nome, $descrizione, $data, $costo, $maxpart)
     {
         // trova id utente attuale
-        $nomeUtenti = $_COOKIE['UserConnesso'];
-        $query = $this->db->query("SELECT id FROM utenti WHERE nome = '$nomeUtenti'");
+        $emailUtente = $_COOKIE['UserConnesso'];
+        $query = $this->db->query("SELECT id FROM utenti WHERE email = '$emailUtente'");
         $idUtente = $query->fetch(PDO::FETCH_OBJ); 
 
         // crea meta

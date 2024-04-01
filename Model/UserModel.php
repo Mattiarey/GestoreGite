@@ -36,7 +36,7 @@ class UserModel
             $statement->execute();
 
             echo "<script>console.log('Record creato');</script>";
-            setcookie('UserConnesso', $nome, time() + (86400 * 30), "/");
+            setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
             // serve toglierlo quando si fa il logout? oppure basta sovrascriverlo
         } catch (PDOException $e) {
             echo "<script>console.log('Error: " . $e->getMessage() . "');</script>";
