@@ -1,5 +1,7 @@
 <?php
-
+/*
+    Non funziona l'eco in questa pagina, dovrei reindirizzarlo come risultato del metodo
+*/
 class UserModel
 {
     private $db;
@@ -38,6 +40,8 @@ class UserModel
             echo "<script>console.log('Record creato');</script>";
             setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
             // serve toglierlo quando si fa il logout? oppure basta sovrascriverlo
+            header("https://google.com", true);
+            exit();
         } catch (PDOException $e) {
             echo "<script>console.log('Error: " . $e->getMessage() . "');</script>";
         }

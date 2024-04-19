@@ -1,8 +1,8 @@
 <?php
-require_once("../Model/UserModel.php");
+require_once("Model/UserModel.php");
 class UserController {
     
-    public function index() {
+    /*public function index() {
         $request = $_SERVER['REQUEST_URI'];
         echo($_SERVER['REQUEST_URI']);
         switch($request){
@@ -10,12 +10,11 @@ class UserController {
                 $this->createUser();
                 break;
         }
-    }
-    private function createUser(){
+    }*/
+    public function createUser(){
         // registrazione
         $userModel = new UserModel();
         $users = $userModel->createUser($_REQUEST['name'], $_REQUEST['surname'], $_REQUEST['email'], $_REQUEST['password']);
-        include './View/UserRegistration.php';
     }
     public function checkUser(){
         $userModel = new UserModel();
