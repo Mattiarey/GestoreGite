@@ -38,6 +38,7 @@
         }
     }
     ~~~
+    Il form della pagina View invia i dati sempre al metodo del Model chiamato index()
 
 3. Configurare in fine il file UserView: creare il file html (php) per visualizzare le variabili salvate dallo UserController
     ~~~html
