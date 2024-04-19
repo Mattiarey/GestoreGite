@@ -1,11 +1,38 @@
 <?php
-require_once("Model/UserModel.php");
+require_once("../Model/UserModel.php");
 class UserController {
+    
     public function index() {
-        $userModel = new UserModel();
-        $users = $userModel->getUsers();
-        include './View/UserView.php';
+        $request = $_SERVER['REQUEST_URI'];
+        echo($_SERVER['REQUEST_URI']);
+        switch($request){
+            case "../Controller/UserController.php/createUser":
+                $this->createUser();
+                break;
+        }
     }
+    private function createUser(){
+        // registrazione
+        $userModel = new UserModel();
+        $users = $userModel->createUser($_REQUEST['name'], $_REQUEST['surname'], $_REQUEST['email'], $_REQUEST['password']);
+        include './View/UserRegistration.php';
+    }
+    public function checkUser(){
+        $userModel = new UserModel();
+        $users = $userModel->checkUser($_POST['email'], $_POST['password']);
+    }
+    public function deleteUser(){
+        // eliminazione
+        $userModel = new UserModel();
+        $users = $userModel->eliminaUser($_POST['email'], $_POST['password']);
+    }
+    public function updateUser(){
+        // modifica
+    }
+
+
+
+    // TEST VARI
     public function aggiungiGino(){
         $userModel = new UserModel();
         $userModel->createUser("Gino", "Carlo", "ginoCarlo@virgilio.it", "1234", "1");
