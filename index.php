@@ -8,3 +8,7 @@ if($request == "/GestoreGite/index.php/registra")
     $userController = new UserController();
     $userController -> createUser();
 }
+if($request == "/GestoreGite/index.php/login"){
+    $userController = new UserController();
+    $userController -> checkUser();
+}

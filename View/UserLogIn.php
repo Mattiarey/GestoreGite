@@ -10,7 +10,7 @@
 
 <body>
     <div>
-        <form action="../Controller/UserController.php" method="POST">
+        <form action="../index.php/login" method="POST">
             <h2>User Login</h2>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>

@@ -21,7 +21,8 @@ class UserController {
     }
     public function checkUser(){
         $userModel = new UserModel();
-        $users = $userModel->checkUser($_POST['email'], $_POST['password']);
+        $messaggio = $userModel->checkUser($_POST['email'], $_POST['password']);
+        echo "<script>console.log('$messaggio');</script>";
     }
     public function deleteUser(){
         // eliminazione

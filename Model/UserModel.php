@@ -24,26 +24,37 @@ class UserModel
     {
         $valore = "";
         try {
-            // Usare i placeholder per preparare la query
-            $query = "INSERT INTO utenti(nome, cognome, email, password, isAdmin) VALUES (:nome, :cognome, :email, :password, :isAdmin)";
-            $statement = $this->db->prepare($query);
+            // guardare se non è già stato creato il record (almeno la mail)
+            $query = $this->db->query("SELECT * FROM utenti WHERE email = '$email'");
+            $risultato = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            // Placeholder vari
-            $statement->bindParam(':nome', $nome);
-            $statement->bindParam(':cognome', $cognome);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':password', $password);
-            $statement->bindParam(':isAdmin', $isAdmin, PDO::PARAM_BOOL); // Booleano
+            if (count($risultato) != 0) {
+                // Usare i placeholder per preparare la query
+                $query = "INSERT INTO utenti(nome, cognome, email, password, isAdmin) VALUES (:nome, :cognome, :email, :password, :isAdmin)";
+                $statement = $this->db->prepare($query);
 
-            // Fare coso
-            $statement->execute();
+                // Placeholder vari
+                $statement->bindParam(':nome', $nome);
+                $statement->bindParam(':cognome', $cognome);
+                $statement->bindParam(':email', $email);
+                $statement->bindParam(':password', $password);
+                $statement->bindParam(':isAdmin', $isAdmin, PDO::PARAM_BOOL); // Booleano
 
-            $valore = "Record creato";
-            setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
-            // serve toglierlo quando si fa il logout? oppure basta sovrascriverlo
-            
-            header("Location: ../View/UserLogin.php", true);
-            exit();
+                // Fare coso
+                $statement->execute();
+
+                $valore = "Record creato";
+                setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
+                // serve toglierlo quando si fa il logout? oppure basta sovrascriverlo
+
+                header("Location: ../View/homepage.php", true);
+                exit();
+            }
+            else{
+                $valore = "Utente già esistente";
+                header("Location: ../View/UserRegistration.php", true);
+                exit();
+            }
 
         } catch (PDOException $e) {
             $valore = "Error: " . $e->getMessage();
@@ -67,6 +78,7 @@ class UserModel
     }
     public function checkUser($email, $password)
     {
+        $valore = "";
         try {
             $query = $this->db->query("SELECT * FROM utenti WHERE email = '$email' AND password = '$password'");
 
@@ -76,17 +88,20 @@ class UserModel
             if ($user) {
                 // Credenziali giuste
                 // Reindirizzare alla pagina corretta
-                echo "<script>console.log('Il brother esiste');</script>";
-                return true;
+                $valore = 'Il brother esiste';
+                header("Location: ../View/homepage.php", true);
+                return $valore;
             } else {
                 // Credenziali sbagliate
                 // Mostrare messaggio di errore
-                echo "<script>console.log('Il brother non esiste');</script>";
-                return false;
+                $valore = 'Il brother non esiste';
+                header("Location: ../View/UserLogin.php", true);
+                return $valore;
             }
         } catch (PDOException $e) {
-            echo "<script>console.log('Error: " . $e->getMessage() . "');</script>";
-            return false;
+            $valore = "Error: " . $e->getMessage();
+            header("Location: ../View/UserLogin.php", true);
+            return $valore;
         }
     }
 }
