@@ -14,7 +14,10 @@ class UserController {
     public function createUser(){
         // registrazione
         $userModel = new UserModel();
-        $users = $userModel->createUser($_REQUEST['name'], $_REQUEST['surname'], $_REQUEST['email'], $_REQUEST['password']);
+        $messaggio = $userModel->createUser($_REQUEST['name'], $_REQUEST['surname'], $_REQUEST['email'], $_REQUEST['password']);
+        // non funziona il messaggio, secondo me perché parte solo se la pagina attuale è caricata
+        // però purtroppo non riesco a reidirizzare bene la pagina
+        echo "<script>console.log('$messaggio');</script>";
     }
     public function checkUser(){
         $userModel = new UserModel();
@@ -23,7 +26,7 @@ class UserController {
     public function deleteUser(){
         // eliminazione
         $userModel = new UserModel();
-        $users = $userModel->eliminaUser($_POST['email'], $_POST['password']);
+        $userModel->eliminaUser($_POST['email'], $_POST['password']);
     }
     public function updateUser(){
         // modifica

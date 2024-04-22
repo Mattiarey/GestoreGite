@@ -22,6 +22,7 @@ class UserModel
     }
     public function createUser($nome, $cognome, $email, $password, $isAdmin = false)
     {
+        $valore = "";
         try {
             // Usare i placeholder per preparare la query
             $query = "INSERT INTO utenti(nome, cognome, email, password, isAdmin) VALUES (:nome, :cognome, :email, :password, :isAdmin)";
@@ -37,14 +38,17 @@ class UserModel
             // Fare coso
             $statement->execute();
 
-            echo "<script>console.log('Record creato');</script>";
+            $valore = "Record creato";
             setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
             // serve toglierlo quando si fa il logout? oppure basta sovrascriverlo
-            header("https://google.com", true);
+            
+            header("Location: ../View/UserLogin.php", true);
             exit();
+
         } catch (PDOException $e) {
-            echo "<script>console.log('Error: " . $e->getMessage() . "');</script>";
+            $valore = "Error: " . $e->getMessage();
         }
+        return $valore;
     }
     public function eliminaUser($email, $password)
     {
