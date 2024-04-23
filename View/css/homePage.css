@@ -1,0 +1,59 @@
+h1,
+#titolo {
+    text-align: center;
+    font-family: "Exo 2", sans-serif;
+    font-style: normal;
+    font-weight: 350;
+    font-size: 65px;
+}
+
+.connessione {
+    display: flex;
+    /* Utilizza Flexbox */
+    justify-content: right;
+    /* Centra orizzontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    height: 30px;
+    border: 1px solid #ccc;
+    /* Solo a scopo dimostrativo */
+}
+
+.connessione a {
+    text-decoration: underline;
+    font-family: "Exo 2", sans-serif;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+#userImage {
+    width: 20px;
+    padding-left: 5px;
+}
+
+.head {
+    border: 1px solid #ccc;
+    /* Solo a scopo dimostrativo */
+    height: 300px;
+}
+.corpo{
+    border: 1px solid #ccc;
+    height: fit-content;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: left;
+}
+.gita{
+    border: 1px solid #ccc;
+    height: 50px;
+    width: 1200px;
+    margin-left: 60px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+#showMore{
+    height: 45px;
+}
+
+/*per il testo normale usare il font family "Alegreya Sans", sans-serif*/
