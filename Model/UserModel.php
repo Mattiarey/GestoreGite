@@ -82,7 +82,7 @@ class UserModel
         try {
             $query = $this->db->query("SELECT * FROM utenti WHERE email = '$email' AND password = '$password'");
 
-            // Fetch user data if the user exists
+            
             $user = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if ($user) {
