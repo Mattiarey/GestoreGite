@@ -9,14 +9,10 @@ h1,
 
 .connessione {
     display: flex;
-    /* Utilizza Flexbox */
     justify-content: right;
-    /* Centra orizzontalmente */
     align-items: center;
-    /* Centra verticalmente */
     height: 30px;
-    border: 1px solid #ccc;
-    /* Solo a scopo dimostrativo */
+    /*border: 1px solid #ccc;*/
 }
 
 .connessione a {
@@ -32,13 +28,12 @@ h1,
 }
 
 .head {
-    border: 1px solid #ccc;
-    /* Solo a scopo dimostrativo */
+    /*border: 1px solid #ccc;*/
     height: 300px;
 }
 
 .corpo {
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     height: fit-content;
     padding-bottom: 10px;
     display: flex;
@@ -47,7 +42,7 @@ h1,
 }
 
 .gita {
-    border: 1px solid #ccc;
+    border: 2px solid black;
     height: 50px;
     width: 1200px;
     margin-left: 60px;
@@ -84,13 +79,16 @@ h1,
 /*Mete*/
 .mete {
     width: 1200px;
-    border: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     margin-left: 60px;
 }
 
 .metePiccole {
     width: 1150px;
-    border: 1px solid #ccc;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
     margin-left: 25px;
 }
 
@@ -100,7 +98,14 @@ h1,
     padding-top: 10px;
     padding-bottom: 10px;
     align-items: center;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid black;
+}
+.onRiga {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
 }
 
 #nomeMeta {
@@ -115,9 +120,14 @@ h1,
     font-family: "Alegreya Sans", sans-serif;
     font-size: 20px;
     font-weight: 3px;
-    padding: 10px 10px 10px 10px;
 }
+.bordino{
 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
 .aggiustaADestra {
     display: flex;
     justify-content: right;
