@@ -17,14 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
-    <!--Animazione che non ho voglia di mettere nel file js-->
-    <script>
-        // JavaScript function to toggle rotation class
-        function rotateIcon(numero) {
-          var icon = document.getElementsByClassName('icona');
-          icon[numero].classList.toggle('ruota');
-        }
-      </script>
+    <script src="./js/script.js"></script>
     <title>HomePage</title>
 </head>
 
@@ -37,10 +30,50 @@
         <h1 id="titolo">HomePage</h1>
     </div>
     <div class="corpo">
-        <div class="gita">
-            <span id="nomeGita">Nome gita</span>
-            <span id="modifica">modifica</span>
-            <img src="../View/images/freccina.png" onclick="rotateIcon(0)" alt="+" class="icona">
+        <div class="gitamete">
+            <div class="gita">
+                <span id="nomeGita">Nome gita</span>
+                <span id="modifica">modifica</span>
+                <img src="./images/freccina.png" onclick="rotateIcon(0)" alt="+" class="icona">
+            </div>
+            <div class="mete">
+                <div class="metePiccole">
+                    <div class="inRiga">
+                        <span id="nomeMeta">Pizzo calabro</span>
+                        <span id="dataMeta">21/11/2021</span>
+                    </div>
+                    <span id="descrioneMeta">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,</span>
+                    <div class="inRiga">
+                        <span id="maxpart">Partecipanti: 23/55</span>
+                        <span id="costoMeta">€23</span>
+                    </div>
+                    <div class="inMezzo"><span id="modifica">modifica</span></div>
+                </div>
+                <div class="metePiccole">
+                    <div class="inRiga">
+                        <span id="nomeMeta">Mocchie</span>
+                        <span id="dataMeta">21/11/2021</span>
+                    </div>
+                    <span id="descrioneMeta">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,</span>
+                    <div class="inRiga">
+                        <span id="maxpart">Partecipanti: 23/55</span>
+                        <span id="costoMeta">€23</span>
+                    </div>
+                    <div class="inMezzo"><span id="modifica">modifica</span></div>
+                </div>
+                <div class="aggiustaADestra">
+                    <span id="costoTotale">Costo totale: €23</span>
+                </div>
+            </div>
+            <div class="gita">
+                <span id="nomeGita">Nome gita</span>
+                <span id="modifica">modifica</span>
+                <img src="./images/freccina.png" onclick="rotateIcon(0)" alt="+" class="icona">
+            </div>
         </div>
     </div>
 </body>
