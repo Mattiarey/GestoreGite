@@ -57,6 +57,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #E9E6FF;
 }
 
 .icona {
@@ -64,10 +65,11 @@ body{
     margin-right: 10px;
     transition: transform 0.3s;
     cursor: pointer;
+    transform: rotate(90deg);
 }
 
 .icona.ruota {
-    transform: rotate(90deg);
+    transform: rotate(0deg);
 }
 
 #nomeGita {
