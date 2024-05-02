@@ -14,3 +14,11 @@ function aggiungiMete(oggettoIcona) {
     testo.textContent = "<div>:P</div>";
     gitaElement.appendChild(testo);
 }
+function prendiGite(){
+    // leggere per bene questo
+    // https://codereview.stackexchange.com/questions/273542/using-php-and-js-to-fetch-data-for-an-entry
+}
+function disconnetti(){
+    document.cookie = "UserConnesso=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.replace("./UserLogIn.php");
+}
