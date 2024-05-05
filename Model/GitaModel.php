@@ -10,7 +10,7 @@ class GitaModel
     }
     // funzione freccia molto carina per avere l'id utente
     // lo use si usa perché le arrow function non possono usare this altrimenti
-    private $idUtente = fn($db) => function () use ($db) {
+    /*private $idUtente = fn($db) => function () use ($db) {
             try {
                 $emailUtente = $_COOKIE['UserConnesso'];
 
@@ -22,7 +22,7 @@ class GitaModel
             } catch (PDOException $e) {
                 return "Errore nella ricerca dell'id Utente";
             }
-        };
+        };*/
     public function creaGita($nome, $descrizione, $data, $costo, $maxpart)
     {
         try {

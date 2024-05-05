@@ -6,12 +6,14 @@ $request = $_SERVER['REQUEST_URI'];
 // forse sarebbe meglio fare uno switch
 
 // USER
-if($request == "/GestoreGite/index.php/registra")
+//                /GestoreGite/index.php/registra
+// bisogna chiamare la cartella proprio GestoreGite
+if($request == "/gestoreGite/index.php/registra")
 {
     $userController = new UserController();
     $userController -> createUser();
 }
-if($request == "/GestoreGite/index.php/login"){
+if($request == "/gestoreGite/index.php/login"){
     $userController = new UserController();
     $userController -> checkUser();
 }

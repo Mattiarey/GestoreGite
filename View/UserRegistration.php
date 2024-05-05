@@ -14,7 +14,7 @@
             <h2>User Registration</h2>
             <input type="text" name="name" placeholder="Nome" required>
             <input type="text" name="surname" placeholder="Cognome" required>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" required maxlength="30">
             <input type="password" name="password" placeholder="Password" required>
             <input type="submit" value="Register">
         </form>

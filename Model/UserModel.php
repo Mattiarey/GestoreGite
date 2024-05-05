@@ -28,7 +28,7 @@ class UserModel
             $query = $this->db->query("SELECT * FROM utenti WHERE email = '$email'");
             $risultato = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            if (count($risultato) != 0) {
+            if (count($risultato) == 0) {
                 // Usare i placeholder per preparare la query
                 $query = "INSERT INTO utenti(nome, cognome, email, password, isAdmin) VALUES (:nome, :cognome, :email, :password, :isAdmin)";
                 $statement = $this->db->prepare($query);
@@ -47,7 +47,7 @@ class UserModel
                 setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
                 // serve toglierlo quando si fa il logout? oppure basta sovrascriverlo
 
-                header("Location: ../View/homepage.php", true);
+                header("Location: ../View/homepage.html", true);
                 exit();
             }
             else{
@@ -89,7 +89,8 @@ class UserModel
                 // Credenziali giuste
                 // Reindirizzare alla pagina corretta
                 $valore = 'Il brother esiste';
-                header("Location: ../View/homepage.php", true);
+                setcookie('UserConnesso', $email, time() + (86400 * 30), "/");
+                header("Location: ../View/homepage.html", true);
                 return $valore;
             } else {
                 // Credenziali sbagliate
