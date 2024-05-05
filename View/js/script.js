@@ -6,11 +6,46 @@ function rotateIcon(numero) {
 
     //aggiungiMete(icon[numero]);
 }
-function aggiungiMete(oggettoIcona) {
-    // prendo il parent
-    var gitaElement = oggettoIcona.closest('.gitamete');
+function premi() {
+    aggiungiMete();
+}
+function aggiungiMete() {
+    var gitaElement = document.getElementsByClassName('gitamete')[0];
 
-    var testo = document.createElement('div');
-    testo.textContent = "<div>:P</div>";
-    gitaElement.appendChild(testo);
+    for (let i = 0; i < 5; i++) {
+        var gita = document.createElement('div');
+        gita.className = "gita"
+        gita.innerHTML = `<span id="nomeGita">Gita ${i}</span>
+                        <span id="modifica">modifica</span>
+        <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona">`;
+        gitaElement.appendChild(gita);
+
+
+        var meta = document.createElement('div');
+        meta.className = 'mete';
+        gitaElement.appendChild(meta);
+
+        var metaElement = document.getElementsByClassName('mete')[i]
+        for (let j = 0; j < 3; j++) {
+            var metina = document.createElement('div');
+            metina.className = 'metePiccole';
+            metina.innerHTML = `<div class="inRiga">
+            <span id="nomeMeta">Meta ${j}</span>
+            <span id="dataMeta">21/11/2021</span></div>
+            <div class="bordino">
+            <span id="descrioneMeta">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,</span></div>
+            <div class="onRiga">
+            <span id="maxpart">Partecipanti: 23/55</span>
+            <span id="costoMeta">€23</span></div>
+            <div class="inMezzo"><span id="modifica">modifica</span></div>`;
+            metaElement.appendChild(metina);
+        }
+        var costoTot = document.createElement('div');
+        costoTot.className = 'aggiustaADestra';
+        costoTot.innerHTML = ` <span id="costoTotale">Costo totale gita ${i}: €46</span>
+        <!--Mappa infinita pazzesca che unisce tutte le mete-->`;
+        metaElement.appendChild(costoTot);
+    }
 }
