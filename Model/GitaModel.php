@@ -1,28 +1,23 @@
 <?php
+require_once ("class/gitameta.php");
 class GitaModel
 {
     private $db;
+    private $idUtente;
     public function __construct()
     {
         // Connessione al database
         $this->db = new PDO('mysql:host=localhost;dbname=Gite', 'root', '');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // prendi id utente
+        $emailUtente = $_COOKIE['UserConnesso'];
+
+        $query = $this->db->prepare("SELECT id FROM utenti WHERE email = :email");
+        $query->execute(['email' => $emailUtente]);
+        $idU = $query->fetch(PDO::FETCH_OBJ);
+        $this->idUtente = $idU->id;
     }
-    // funzione freccia molto carina per avere l'id utente
-    // lo use si usa perché le arrow function non possono usare this altrimenti
-    /*private $idUtente = fn($db) => function () use ($db) {
-            try {
-                $emailUtente = $_COOKIE['UserConnesso'];
-
-                $query = $db->prepare("SELECT id FROM utenti WHERE email = :email");
-                $query->execute(['email' => $emailUtente]);
-                $idU = $query->fetch(PDO::FETCH_OBJ);
-
-                return $idU->id;
-            } catch (PDOException $e) {
-                return "Errore nella ricerca dell'id Utente";
-            }
-        };*/
     public function creaGita($nome, $descrizione, $data, $costo, $maxpart)
     {
         try {
@@ -57,7 +52,7 @@ class GitaModel
     }
     public function eliminaGita($nome, $data)
     {
-        $creatore = (string)$this->idUtente;
+        $creatore = (string) $this->idUtente;
         try {
             //trova id meta
             $query = $this->db->query("SELECT id FROM mete WHERE nome = '$nome' AND data = '$data'");
@@ -71,9 +66,26 @@ class GitaModel
             $statement = $this->db->prepare($query);
             $statement->execute();
         } catch (PDOException $e) {
+
+        }
+    }
+    public function prendiGita()
+    {
+        $gite = [];
+
+        // prendere tutte le mete dell'utente connesso
+        $query = $this->db->query("SELECT fkMete FROM gita WHERE fkUtenti = '$this->idUtente'");
+        $meteDelBro = $query->fetch(PDO::FETCH_OBJ);
+
+        //prendere mete della gita
+        for ($i = 0; $i < $meteDelBro->length; $i++) {
+            $idMeta = $meteDelBro->fkMete[$i];
+            $query = $this->db->query("SELECT * FROM mete WHERE id = '$idMeta");
+            $giteVarie = $query->fetch(PDO::FETCH_OBJ);
             
         }
     }
+
 }
 /*
 $query = "DELETE FROM utenti WHERE email = :email AND password = :password";

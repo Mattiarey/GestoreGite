@@ -1,8 +1,6 @@
 function rotateIcon(numero) {
     var icon = document.getElementsByClassName('icona');
     icon[numero].classList.toggle('ruota');
-    // avessi un modo per capire che indice dell'array icona è non dovrei fare sto casino
-    // con i numerini
 
     //aggiungiMete(icon[numero]);
 }
@@ -52,4 +50,7 @@ function aggiungiMete() {
 function disconnetti() {
     document.cookie = "UserConnesso=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.replace("./UserLogIn.php");
+}
+function prendiDati(){
+    
 }

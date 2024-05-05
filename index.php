@@ -8,12 +8,12 @@ $request = $_SERVER['REQUEST_URI'];
 // USER
 //                /GestoreGite/index.php/registra
 // bisogna chiamare la cartella proprio GestoreGite
-if($request == "/gestoreGite/index.php/registra")
+if($request == "/GestoreGite/index.php/registra")
 {
     $userController = new UserController();
     $userController -> createUser();
 }
-if($request == "/gestoreGite/index.php/login"){
+if($request == "/GestoreGite/index.php/login"){
     $userController = new UserController();
     $userController -> checkUser();
 }
