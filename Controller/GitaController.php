@@ -13,6 +13,10 @@ class GitaController
         $gitaModel = new GitaModel();
         $gitaModel->eliminaGita($_POST['nome'], $_POST['data']);
     }
+    public function prendiGita(){
+        $gitaModel = new GitaModel();
+        $gitaModel->prendiGita();
+    }
 
     // Per capire
     private function ProvaggiungiGita()

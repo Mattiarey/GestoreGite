@@ -52,5 +52,13 @@ function disconnetti() {
     window.location.replace("./UserLogIn.php");
 }
 function prendiDati(){
-    
+    var xhr = new XMLHttpRequest();
+            xhr.open("GET", "../index.php/prendiGita", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data); 
+                }
+            };
+            xhr.send();
 }

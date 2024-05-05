@@ -75,14 +75,32 @@ class GitaModel
 
         // prendere tutte le mete dell'utente connesso
         $query = $this->db->query("SELECT fkMete FROM gita WHERE fkUtenti = '$this->idUtente'");
-        $meteDelBro = $query->fetch(PDO::FETCH_OBJ);
+        $meteDelBro = $query->fetch(PDO::FETCH_NUM);
+        /*
+            Tecnicamente questo comando dovrebbe cercare, con l'id della persona registrata, tutte le foreign key delle mete
+            collegate a questo id.
+            Purtroppo la query, nonostante sia corretta (su phpmyadmin mi da il risultato corretto), mi restituisce un solo valore
+            invece che un array. Quindi mi restituisce un risultato corretto, ma parziale.
+            Per replicare quello che ho fatto sul database bisogna registrare un utente (sulla pagina), da phpmyadmin aggiungere dei campi sulla tabella gite e su mete
+            Fatto questo con il debugger di php su vscode si vede facilmente.
+            Per favore, aiuto, è tutto il giorno che programmo, non capisco più niente 
+        */
+
+
+
+
 
         //prendere mete della gita
-        for ($i = 0; $i < $meteDelBro->length; $i++) {
-            $idMeta = $meteDelBro->fkMete[$i];
-            $query = $this->db->query("SELECT * FROM mete WHERE id = '$idMeta");
+
+        // lunghezza coso
+        $lughezza = count((array) $meteDelBro);
+
+        for ($i = 0; $i < $lughezza; $i++) {
+            $idMeta = $meteDelBro->fkMete;
+            $query = $this->db->query("SELECT * FROM mete WHERE id = '$idMeta'");
+            $cacca = True;
             $giteVarie = $query->fetch(PDO::FETCH_OBJ);
-            
+
         }
     }
 

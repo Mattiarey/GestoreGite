@@ -27,3 +27,8 @@ if($request == "/GestoreGite/index.php/eliminaGita"){
     $gitaController = new GitaController();
     $gitaController -> eliminaGita();
 }
+if($request == "/GestoreGite/index.php/prendiGita"){
+    $gitaController = new GitaController();
+    $gitaController -> prendiGita();
+}
+
