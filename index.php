@@ -31,6 +31,6 @@ if($request == "/GestoreGite/index.php/prendiGita"){
     $gitaController = new GitaController();
     $result = $gitaController -> prendiGita();
     header('Content-Type: application/json');
-    echo $result;
+    echo json_encode($result);
 }
 

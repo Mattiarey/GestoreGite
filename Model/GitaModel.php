@@ -131,7 +131,8 @@ class GitaModel
             // tanto dovrebbero essere array paralleli
             $veraGita[] = new Gitameta($gite[$i]->id, $gite[$i]->nome, $gite[$i]->descrizione, $gite[$i]->data, $gite[$i]->costo, $gite[$i]->massimoPartecipanti, $tourPerMeta[$i]);
         }
-        return json_encode($veraGita);
+        return $veraGita;
+        
     }
 
 }
