@@ -29,6 +29,8 @@ if($request == "/GestoreGite/index.php/eliminaGita"){
 }
 if($request == "/GestoreGite/index.php/prendiGita"){
     $gitaController = new GitaController();
-    $gitaController -> prendiGita();
+    $result = $gitaController -> prendiGita();
+    header('Content-Type: application/json');
+    echo $result;
 }
 

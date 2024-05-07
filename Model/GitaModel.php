@@ -70,6 +70,7 @@ class GitaModel
         }
     }
     // funzione ottimizzabile ma funzionante
+    // forse potevo fare semplicemente dei join nelle query -_-
     public function prendiGita()
     {
         $gite = [];
@@ -122,17 +123,15 @@ class GitaModel
 
             }
             $tourPerMeta[] = $tourVari;
-            /*qui dentro devo cambiare questa query e mettere quella di prima
-            devo mettere dentro la classe gitameta un array di tour, quelli giusti*/
 
         }
         $veraGita = array();
         // riempi classi
         for ($i = 0; $i < count((array) $gite); $i++){
-            // tanto l'ordine nell'array dovrebbe essere lo stesso
+            // tanto dovrebbero essere array paralleli
             $veraGita[] = new Gitameta($gite[$i]->id, $gite[$i]->nome, $gite[$i]->descrizione, $gite[$i]->data, $gite[$i]->costo, $gite[$i]->massimoPartecipanti, $tourPerMeta[$i]);
         }
-        echo json_encode($veraGita);
+        return json_encode($veraGita);
     }
 
 }

@@ -15,7 +15,8 @@ class GitaController
     }
     public function prendiGita(){
         $gitaModel = new GitaModel();
-        $gitaModel->prendiGita();
+        $result = $gitaModel->prendiGita();
+        return $result;
     }
 
     // Per capire
