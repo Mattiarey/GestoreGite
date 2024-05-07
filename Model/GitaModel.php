@@ -69,6 +69,7 @@ class GitaModel
 
         }
     }
+    // funzione ottimizzabile ma funzionante
     public function prendiGita()
     {
         $gite = [];
@@ -93,11 +94,45 @@ class GitaModel
         $lughezza = count((array) $meteDelBro);
 
         for ($i = 0; $i < $lughezza; $i++) {
+            // prendi tutte le mete
             $idMeta = $meteDelBro[$i];
             $query = $this->db->query("SELECT * FROM mete WHERE id = '$idMeta'");
-            $giteVarie = $query->fetch(PDO::FETCH_OBJ);
+            $gite[] = $query->fetch(PDO::FETCH_OBJ);
 
         }
+        // questo array contiene un array che contiene i tour per meta
+        $tourPerMeta = array();
+        for ($i = 0; $i < $lughezza; $i++) {
+            // prendi tutti i tour
+            $fkMeta = $meteDelBro[$i];
+            $query = $this->db->query("SELECT * FROM tour WHERE fkMeta = '$fkMeta'");
+            $tour = $query->fetch(PDO::FETCH_OBJ);
+
+            $conn = new mysqli("localhost", "root", "", "gite");
+            $sql = "SELECT * FROM tour WHERE fkMeta = '$fkMeta'";
+            $result = $conn->query($sql);
+
+
+            $tourVari = array();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $tour = $row;
+                    $tourVari[] = new Tour($tour['id'], $tour['nome'], $tour['descrizione'], $tour['durata'], $tour['costo'], $tour['fkMeta']);
+                }
+
+            }
+            $tourPerMeta[] = $tourVari;
+            /*qui dentro devo cambiare questa query e mettere quella di prima
+            devo mettere dentro la classe gitameta un array di tour, quelli giusti*/
+
+        }
+        $veraGita = array();
+        // riempi classi
+        for ($i = 0; $i < count((array) $gite); $i++){
+            // tanto l'ordine nell'array dovrebbe essere lo stesso
+            $veraGita[] = new Gitameta($gite[$i]->id, $gite[$i]->nome, $gite[$i]->descrizione, $gite[$i]->data, $gite[$i]->costo, $gite[$i]->massimoPartecipanti, $tourPerMeta[$i]);
+        }
+        echo json_encode($veraGita);
     }
 
 }

@@ -6,12 +6,14 @@ class Tour
     private $descrizione;
     private $durata;
     private $costo;
-    public function __construct($id, $nome, $descrizione, $durata, $costo){
+    public $fkMeta;
+    public function __construct($id, $nome, $descrizione, $durata, $costo, $fkMeta){
         $this->id = $id;
         $this->nome = $nome;
         $this->descrizione = $descrizione;
         $this->durata = $durata;
         $this->costo = $costo;
+        $this->fkMeta = $fkMeta;
     }
 }
 class Gitameta
