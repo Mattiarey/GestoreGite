@@ -7,13 +7,13 @@ function rotateIcon(numero) {
 function premi() {
     aggiungiMete();
 }
-function aggiungiMete() {
+function aggiungiMete(data) {
     var gitaElement = document.getElementsByClassName('gitamete')[0];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < data.length; i++) {
         var gita = document.createElement('div');
         gita.className = "gita"
-        gita.innerHTML = `<span id="nomeGita">Gita ${i}</span>
+        gita.innerHTML = `<span id="nomeGita">${data[i].nome}</span>
                         <span id="modifica">modifica</span>
         <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona">`;
         gitaElement.appendChild(gita);
@@ -23,26 +23,28 @@ function aggiungiMete() {
         meta.className = 'mete';
         gitaElement.appendChild(meta);
 
-        var metaElement = document.getElementsByClassName('mete')[i]
-        for (let j = 0; j < 3; j++) {
+        var metaElement = document.getElementsByClassName('mete')[i];
+        prezzoTot = 0;
+
+        // sarebbe carino caricare i tour ordinati per data, ma forse è meglio farlo dal backend
+        for (let j = 0; j < data[i].tours.length; j++) {
+            prezzoTot += parseFloat(data[i].tours[j].costo);
             var metina = document.createElement('div');
             metina.className = 'metePiccole';
             metina.innerHTML = `<div class="inRiga">
-            <span id="nomeMeta">Meta ${j}</span>
-            <span id="dataMeta">21/11/2021</span></div>
+            <span id="nomeMeta">${data[i].tours[j].nome}</span>
+            <span id="dataMeta">Durata: ${data[i].tours[j].durata} giorni</span></div>
             <div class="bordino">
-            <span id="descrioneMeta">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,</span></div>
+            <span id="descrioneMeta">${data[i].tours[j].descrizione}</span></div>
             <div class="onRiga">
-            <span id="maxpart">Partecipanti: 23/55</span>
-            <span id="costoMeta">€23</span></div>
+            <span id="maxpart">Partecipanti: <b>da implementare</b>/${data[i].maxPart}</span>
+            <span id="costoMeta">€${data[i].tours[j].costo}</span></div>
             <div class="inMezzo"><span id="modifica">modifica</span></div>`;
             metaElement.appendChild(metina);
         }
         var costoTot = document.createElement('div');
         costoTot.className = 'aggiustaADestra';
-        costoTot.innerHTML = ` <span id="costoTotale">Costo totale gita ${i}: €46</span>
+        costoTot.innerHTML = ` <span id="costoTotale">Costo totale gita "${data[i].nome}": €${prezzoTot}</span>
         <!--Mappa infinita pazzesca che unisce tutte le mete-->`;
         metaElement.appendChild(costoTot);
     }
@@ -57,8 +59,14 @@ function prendiDati(){
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var data = JSON.parse(xhr.responseText);
-                    console.log(data); 
+                    aggiungiMete(data);
                 }
             };
             xhr.send();
+}
+function modificaEvento(){
+
+}
+function modificaTour(){
+
 }
