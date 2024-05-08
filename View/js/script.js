@@ -115,3 +115,9 @@ function aggiungiPart(num, si) {
 window.onload = () => {
     prendiDati();
 }
+function aggiungiGita(){
+ location.href();
+}
+function aggiungiMeta(){
+
+}
