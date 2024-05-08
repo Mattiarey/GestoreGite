@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 08, 2024 alle 21:13
+-- Creato il: Mag 08, 2024 alle 21:42
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `gite`
 --
+CREATE DATABASE IF NOT EXISTS `gite` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gite`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Struttura della tabella `commenti`
 --
 
+DROP TABLE IF EXISTS `commenti`;
 CREATE TABLE `commenti` (
   `id` int(11) NOT NULL,
   `titolo` varchar(60) DEFAULT NULL,
@@ -43,6 +46,7 @@ CREATE TABLE `commenti` (
 -- Struttura della tabella `gita`
 --
 
+DROP TABLE IF EXISTS `gita`;
 CREATE TABLE `gita` (
   `id` int(11) NOT NULL,
   `fkUtenti` int(11) DEFAULT NULL,
@@ -63,6 +67,7 @@ INSERT INTO `gita` (`id`, `fkUtenti`, `fkMete`) VALUES
 -- Struttura della tabella `mete`
 --
 
+DROP TABLE IF EXISTS `mete`;
 CREATE TABLE `mete` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
@@ -85,6 +90,7 @@ INSERT INTO `mete` (`id`, `nome`, `descrizione`, `data`, `costo`) VALUES
 -- Struttura della tabella `possonovedere`
 --
 
+DROP TABLE IF EXISTS `possonovedere`;
 CREATE TABLE `possonovedere` (
   `id` int(11) NOT NULL,
   `fkUtente` int(11) NOT NULL,
@@ -106,6 +112,7 @@ INSERT INTO `possonovedere` (`id`, `fkUtente`, `fkGita`, `fkTour`) VALUES
 -- Struttura della tabella `tour`
 --
 
+DROP TABLE IF EXISTS `tour`;
 CREATE TABLE `tour` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
@@ -133,6 +140,7 @@ INSERT INTO `tour` (`id`, `nome`, `descrizione`, `durata`, `costo`, `fkMeta`, `m
 -- Struttura della tabella `utenti`
 --
 
+DROP TABLE IF EXISTS `utenti`;
 CREATE TABLE `utenti` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
