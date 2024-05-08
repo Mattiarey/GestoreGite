@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 05, 2024 alle 14:52
+-- Creato il: Mag 08, 2024 alle 21:13
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -54,7 +54,8 @@ CREATE TABLE `gita` (
 --
 
 INSERT INTO `gita` (`id`, `fkUtenti`, `fkMete`) VALUES
-(1, 56, 1);
+(1, 56, 1),
+(2, 56, 2);
 
 -- --------------------------------------------------------
 
@@ -67,16 +68,37 @@ CREATE TABLE `mete` (
   `nome` varchar(20) DEFAULT NULL,
   `descrizione` varchar(255) DEFAULT NULL,
   `data` date DEFAULT NULL,
-  `costo` float DEFAULT NULL,
-  `massimoPartecipanti` int(11) DEFAULT NULL
+  `costo` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `mete`
 --
 
-INSERT INTO `mete` (`id`, `nome`, `descrizione`, `data`, `costo`, `massimoPartecipanti`) VALUES
-(1, 'Pizzo Calabro', 'Un bellissimo posto in Calabria', '2003-02-24', 25, 7);
+INSERT INTO `mete` (`id`, `nome`, `descrizione`, `data`, `costo`) VALUES
+(1, 'Pizzo Calabro', 'Un bellissimo posto in Calabria', '2003-02-24', 25),
+(2, 'Pizzo Calabro', 'Un bellissimo posto in Calabria', '2003-02-24', 25);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `possonovedere`
+--
+
+CREATE TABLE `possonovedere` (
+  `id` int(11) NOT NULL,
+  `fkUtente` int(11) NOT NULL,
+  `fkGita` int(11) NOT NULL,
+  `fkTour` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `possonovedere`
+--
+
+INSERT INTO `possonovedere` (`id`, `fkUtente`, `fkGita`, `fkTour`) VALUES
+(2, 56, 1, 1),
+(3, 63, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -90,8 +112,20 @@ CREATE TABLE `tour` (
   `descrizione` varchar(255) DEFAULT NULL,
   `durata` int(11) DEFAULT NULL,
   `costo` float DEFAULT NULL,
-  `fkMeta` int(11) DEFAULT NULL
+  `fkMeta` int(11) DEFAULT NULL,
+  `maxPart` int(11) NOT NULL,
+  `partAttuali` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `tour`
+--
+
+INSERT INTO `tour` (`id`, `nome`, `descrizione`, `durata`, `costo`, `fkMeta`, `maxPart`, `partAttuali`) VALUES
+(1, 'Tour della caccca', 'c\'è la cacca', 5, 73, 1, 10, 1),
+(3, 'Tour del 39', 'Don\'t you hear my call, don\'t you hear me calling you', 39, 25198500, 1, 0, 0),
+(4, 'Sono invisibile', 'Questo tour non si deve vedere, scemo', 23, 312312, 2, 0, 0),
+(5, 'Sono invisibile', 'Questo tour non si deve vedere, scemo', 23, 312312, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -153,6 +187,12 @@ ALTER TABLE `mete`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indici per le tabelle `possonovedere`
+--
+ALTER TABLE `possonovedere`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indici per le tabelle `tour`
 --
 ALTER TABLE `tour`
@@ -179,19 +219,25 @@ ALTER TABLE `commenti`
 -- AUTO_INCREMENT per la tabella `gita`
 --
 ALTER TABLE `gita`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `mete`
 --
 ALTER TABLE `mete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `possonovedere`
+--
+ALTER TABLE `possonovedere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `tour`
 --
 ALTER TABLE `tour`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`

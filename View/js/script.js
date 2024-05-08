@@ -14,7 +14,7 @@ function aggiungiMete(data) {
         var gita = document.createElement('div');
         gita.className = "gita"
         gita.innerHTML = `<span id="nomeGita">${data[i].nome}</span>
-                        <span id="modifica">modifica</span>
+                        <span id="modifica" onclick="modificaEvento(${data[i].id})">modifica</span>
         <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona">`;
         gitaElement.appendChild(gita);
 
@@ -26,9 +26,14 @@ function aggiungiMete(data) {
         var metaElement = document.getElementsByClassName('mete')[i];
         prezzoTot = 0;
 
+
         // sarebbe carino caricare i tour ordinati per data, ma forse è meglio farlo dal backend
         for (let j = 0; j < data[i].tours.length; j++) {
             prezzoTot += parseFloat(data[i].tours[j].costo);
+
+            canPartecipate = false;
+            if (data[i].tours[j].partAtt < data[i].tours[j].maxPart) canPartecipate = true;
+
             var metina = document.createElement('div');
             metina.className = 'metePiccole';
             metina.innerHTML = `<div class="inRiga">
@@ -37,9 +42,10 @@ function aggiungiMete(data) {
             <div class="bordino">
             <span id="descrioneMeta">${data[i].tours[j].descrizione}</span></div>
             <div class="onRiga">
-            <span id="maxpart">Partecipanti: <b>da implementare</b>/${data[i].maxPart}</span>
+            <span id="maxpart">Partecipanti: ${data[i].tours[j].partAtt}/${data[i].tours[j].maxPart}</span>
             <span id="costoMeta">€${data[i].tours[j].costo}</span></div>
-            <div class="inMezzo"><span id="modifica">modifica</span></div>`;
+            <div class="inMezzo"><span id="modifica" onclick="modificaTour(${data[i].tours[j].id})">modifica</span>
+            <span id="modifica" onclick="aggiungiPart(${data[i].tours[j].id}, ${canPartecipate})">Aggiungi Partecipanti</span></div>`;
             metaElement.appendChild(metina);
         }
         var costoTot = document.createElement('div');
@@ -53,20 +59,59 @@ function disconnetti() {
     document.cookie = "UserConnesso=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.replace("./UserLogIn.php");
 }
-function prendiDati(){
-    var xhr = new XMLHttpRequest();
-            xhr.open("GET", "../index.php/prendiGita", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var data = JSON.parse(xhr.responseText);
-                    aggiungiMete(data);
-                }
-            };
-            xhr.send();
-}
-function modificaEvento(){
+function prendiDati() {
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "../index.php/prendiGita", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                aggiungiMete(data);
+            }
+        };
+        xhr.send();
+    } catch (ex) { }
 
+    // aggiungi anche le mete dove sei stato aggiunto
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "../index.php/rubaGite", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                aggiungiMete(data);
+            }
+        };
+        xhr.send();
+    } catch (ex) { }
 }
-function modificaTour(){
+function modificaEvento(num) {
+    localStorage.setItem('idEvento', num);
+    window.location.href = "./modificaEvento.php"
+}
+function modificaTour(num) {
+    localStorage.setItem('idTour', num);
+    window.location.href = "./modificaTour.php"
+}
+function aggiungiPart(num, si) {
+    if (si) {
+        var mail = prompt("Inserisci la mail dell'utente che vuoi aggiungere a questo tour");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `../index.php/aggiungiTizio?mail=${mail}&idTour=${num}`, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                aggiungiMete(data);
+            }
+        };
+        xhr.send();
 
+        // ricarica pagina
+        location.reload();
+    } else {
+        alert("Non puoi aggiungere più partecipanti");
+    }
+}
+window.onload = () => {
+    prendiDati();
 }

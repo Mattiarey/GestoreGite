@@ -1,6 +1,7 @@
 <?php
-require_once("Controller/UserController.php");
-require_once("Controller/GitaController.php");
+require_once ("Controller/UserController.php");
+require_once ("Controller/GitaController.php");
+require_once ("Controller/visualizzaController.php");
 
 $request = $_SERVER['REQUEST_URI'];
 // forse sarebbe meglio fare uno switch
@@ -8,29 +9,43 @@ $request = $_SERVER['REQUEST_URI'];
 // USER
 //                /GestoreGite/index.php/registra
 // bisogna chiamare la cartella proprio GestoreGite
-if($request == "/GestoreGite/index.php/registra")
-{
+if ($request == "/GestoreGite/index.php/registra") {
     $userController = new UserController();
-    $userController -> createUser();
+    $userController->createUser();
 }
-if($request == "/GestoreGite/index.php/login"){
+if ($request == "/GestoreGite/index.php/login") {
     $userController = new UserController();
-    $userController -> checkUser();
+    $userController->checkUser();
 }
 
 // GITA
-if($request == "/GestoreGite/index.php/aggiungiGita"){
+if ($request == "/GestoreGite/index.php/aggiungiGita") {
     $gitaController = new GitaController();
-    $gitaController -> aggiungiGita();
+    $gitaController->aggiungiGita();
 }
-if($request == "/GestoreGite/index.php/eliminaGita"){
+if ($request == "/GestoreGite/index.php/eliminaGita") {
     $gitaController = new GitaController();
-    $gitaController -> eliminaGita();
+    $gitaController->eliminaGita();
 }
-if($request == "/GestoreGite/index.php/prendiGita"){
+if ($request == "/GestoreGite/index.php/prendiGita") {
     $gitaController = new GitaController();
-    $result = $gitaController -> prendiGita();
+    $result = $gitaController->prendiGita();
     header('Content-Type: application/json');
     echo json_encode($result);
+}
+if ($request == "/GestoreGite/index.php/rubaGite") {
+    $gitaController = new GitaController();
+    $result = $gitaController->rubaGite();
+    header('Content-Type: application/json');
+    echo json_encode($result);
+}
+
+// VISUALIZZAZIONE
+$richiesta = explode("?", $request);
+if ($richiesta[0] == "/GestoreGite/index.php/aggiungiTizio") {
+    if ($_COOKIE['UserConnesso'] != $_GET['mail']) {
+        $vsController = new VisualizzaController();
+        $vsController->aggiungiTizio($_GET['mail'], $_GET['idTour']);
+    }
 }
 

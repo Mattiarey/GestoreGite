@@ -18,6 +18,11 @@ class GitaController
         $result = $gitaModel->prendiGita();
         return $result;
     }
+    public function rubaGite(){
+        $gitaModel = new GitaModel();
+        $result = $gitaModel->rubaGite();
+        return $result;
+    }
 
     // Per capire
     private function ProvaggiungiGita()
