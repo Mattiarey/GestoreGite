@@ -183,3 +183,29 @@ body{
     color: #B4ADEA; /*perry winkle*/
     color: #d6ffb7; /*verdino*/
 }
+
+
+/* aggiungi meta e aggiungi gita */
+.contenitore{
+    border: 1px solid #18265D;
+    margin-left: 10%;
+    padding: 10px;
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #d5d2ee;
+}
+.inserimento{
+    padding: 5px;
+}
+.inserimento input{
+    height: 50px;
+    width: 400px;
+    padding-left: 5px;
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 5px;
+}
