@@ -29,12 +29,12 @@
     </div>
     <div class="corpo">
         <form action="../index.php/aggiungiMeta?mail=<?php echo $_COOKIE['UserConnesso'] ?>"method="POST" class="contenitore">
-            <div class="inserimento"><input type="text" placeholder="Nome" maxlength="20"></div>
-            <div class="inserimento"><input type="textarea" placeholder="Descrizione" maxlength="255"></div>
-            <div class="inserimento"><input type="number" placeholder="Durata"></div>
-            <div class="inserimento"><input type="number" placeholder="Costo"></div>
-            <div class="inserimento"><input type="text" placeholder="Nome Gita"></div>
-            <div class="inserimento"><input type="number" placeholder="Partecipanti massimi"></div>
+            <div class="inserimento"><input type="text" placeholder="Nome" maxlength="20" name="nome"></div>
+            <div class="inserimento"><input type="textarea" placeholder="Descrizione" maxlength="255" name="descrizione"></div>
+            <div class="inserimento"><input type="number" placeholder="Durata" name="durata"></div>
+            <div class="inserimento"><input type="number" placeholder="Costo" name="costo"></div>
+            <div class="inserimento"><input type="text" placeholder="Nome Gita" name="fkMeta"></div>
+            <div class="inserimento"><input type="number" placeholder="Partecipanti massimi" name="maxPart"></div>
             <div class="inserimento"><input type="submit" value="Invia"></div>
         </form>
     </div>

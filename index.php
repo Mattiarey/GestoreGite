@@ -2,9 +2,10 @@
 require_once ("Controller/UserController.php");
 require_once ("Controller/GitaController.php");
 require_once ("Controller/visualizzaController.php");
+require_once ("Controller/metaController.php");
 
 $request = $_SERVER['REQUEST_URI'];
-// forse sarebbe meglio fare uno switch
+// Per ottimizzare mettere uno switch
 
 // USER
 //                /GestoreGite/index.php/registra
@@ -38,6 +39,13 @@ if ($request == "/GestoreGite/index.php/rubaGite") {
     $result = $gitaController->rubaGite();
     header('Content-Type: application/json');
     echo json_encode($result);
+}
+
+
+// Meta
+if ($request == "/GestoreGite/index.php/aggiungiMeta"){
+    $gitaController = new MetaController();
+    $gitaController->aggiungiMeta();
 }
 
 // VISUALIZZAZIONE
