@@ -28,11 +28,11 @@
         <a href="./homepage.html"><input type="submit" value="Torna indietro"></a>
     </div>
     <div class="corpo">
-        <form action="../index.php/aggiungiGita?mail=<?php echo $_COOKIE['UserConnesso'] ?>" method="POST" class="contenitore">
-            <div class="inserimento"><input type="text" placeholder="Nome" maxlength="20"></div>
-            <div class="inserimento"><input type="textarea" placeholder="Descrizione" maxlength="255"></div>
-            <div class="inserimento"><input type="date" placeholder="Data"></div>
-            <div class="inserimento"><input type="number" placeholder="Costo"></div>
+        <form action="../index.php/aggiungiGita" method="POST" class="contenitore">
+            <div class="inserimento"><input type="text" placeholder="Nome" maxlength="20" name="nome"></div>
+            <div class="inserimento"><input type="textarea" placeholder="Descrizione" maxlength="255" name="descrizione"></div>
+            <div class="inserimento"><input type="date" placeholder="Data" name="data"></div>
+            <div class="inserimento"><input type="number" placeholder="Costo" name="costo"></div>
             <div class="inserimento"><input type="submit" value="Invia"></div>
         </form>
     </div>

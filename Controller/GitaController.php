@@ -6,7 +6,7 @@ class GitaController
     public function aggiungiGita()
     {
         $gitaModel = new GitaModel();
-        $gitaModel->creaGita($_POST['nome'], $_POST['descrizione'], $_POST['data'], $_POST['costo'], $_POST['maxpart']);
+        $gitaModel->creaGita($_POST['nome'], $_POST['descrizione'], $_POST['data'], $_POST['costo']);
     }
     public function eliminaGita()
     {
@@ -29,6 +29,6 @@ class GitaController
     {
         $gitaModel = new GitaModel();
         //                                                                     anno/mese/giorno
-        $gitaModel->creaGita("Pizzo Calabro", "Un bellissimo posto in Calabria", "03/02/24", 25, 7);
+        $gitaModel->creaGita("Pizzo Calabro", "Un bellissimo posto in Calabria", "03/02/24", 25);
     }
 }
