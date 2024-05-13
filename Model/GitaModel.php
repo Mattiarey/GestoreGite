@@ -52,24 +52,15 @@ class GitaModel
 
         }
     }
-    public function eliminaGita($nome, $data)
+    public function eliminaGita($id)
     {
-        $creatore = (string) $this->idUtente;
-        try {
-            //trova id meta
-            $query = $this->db->query("SELECT id FROM mete WHERE nome = '$nome' AND data = '$data'");
-            $idMeta = $query->fetch(PDO::FETCH_OBJ);
-            //elimina gita
-            $query = "DELETE FROM gita WHERE fkUtenti = '$creatore' AND fkmete = '$idMeta'";
-            $statement = $this->db->prepare($query);
-            $statement->execute();
-            //elimina meta
-            $query = "DELETE FROM mete WHERE nome = '$nome' AND data = '$data'";
-            $statement = $this->db->prepare($query);
-            $statement->execute();
-        } catch (PDOException $e) {
+        $query = "DELETE FROM gita WHERE fkMete = $id;";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
 
-        }
+        $query = "DELETE FROM mete WHERE id = $id;";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
     }
     // funzione ottimizzabile ma funzionante
     // forse potevo fare semplicemente dei join nelle query -_-
@@ -129,14 +120,15 @@ class GitaModel
         }
         $veraGita = array();
         // riempi classi
-        for ($i = 0; $i < count((array) $gite); $i++){
+        for ($i = 0; $i < count((array) $gite); $i++) {
             // tanto dovrebbero essere array paralleli
             $veraGita[] = new Gitameta($gite[$i]->id, $gite[$i]->nome, $gite[$i]->descrizione, $gite[$i]->data, $gite[$i]->costo, $tourPerMeta[$i]);
         }
         return $veraGita;
-        
+
     }
-    function rubaGite(){
+    function rubaGite()
+    {
         $gite = [];
 
         $meteDelBro = [];
@@ -191,7 +183,7 @@ class GitaModel
         }
         $veraGita = array();
         // riempi classi
-        for ($i = 0; $i < count((array) $gite); $i++){
+        for ($i = 0; $i < count((array) $gite); $i++) {
             // tanto dovrebbero essere array paralleli
             $veraGita[] = new Gitameta($gite[$i]->id, $gite[$i]->nome, $gite[$i]->descrizione, $gite[$i]->data, $gite[$i]->costo, $tourPerMeta[$i]);
         }

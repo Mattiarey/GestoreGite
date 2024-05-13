@@ -5,6 +5,8 @@ require_once ("Controller/visualizzaController.php");
 require_once ("Controller/metaController.php");
 
 $request = $_SERVER['REQUEST_URI'];
+
+$richiesta = explode("?", $request);
 // Per ottimizzare mettere uno switch
 
 // USER
@@ -24,7 +26,7 @@ if ($request == "/GestoreGite/index.php/aggiungiGita") {
     $gitaController = new GitaController();
     $gitaController->aggiungiGita();
 }
-if ($request == "/GestoreGite/index.php/eliminaGita") {
+if ($richiesta[0]  == "/GestoreGite/index.php/eliminaGita") {
     $gitaController = new GitaController();
     $gitaController->eliminaGita();
 }
@@ -43,10 +45,13 @@ if ($request == "/GestoreGite/index.php/rubaGite") {
 
 
 // Meta
-$richiesta = explode("?", $request);
 if ($richiesta[0] == "/GestoreGite/index.php/aggiungiMeta"){
-    $gitaController = new MetaController();
-    $gitaController->aggiungiMeta();
+    $metaController = new MetaController();
+    $metaController->aggiungiMeta();
+}
+if ($richiesta[0] == "/GestoreGite/index.php/eliminaMeta") {
+    $metaController = new MetaController();
+    $metaController->eliminaMeta();
 }
 
 // VISUALIZZAZIONE

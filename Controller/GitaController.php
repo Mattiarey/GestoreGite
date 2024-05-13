@@ -11,7 +11,7 @@ class GitaController
     public function eliminaGita()
     {
         $gitaModel = new GitaModel();
-        $gitaModel->eliminaGita($_POST['nome'], $_POST['data']);
+        $gitaModel->eliminaGita($_GET['id']);
     }
     public function prendiGita(){
         $gitaModel = new GitaModel();

@@ -77,6 +77,10 @@ body{
     font-size: 35px;
     font-weight: 5px;
     padding-left: 20px;
+    text-decoration: none;
+}
+#nomeGita:hover{
+    text-decoration: line-through;
 }
 
 #modifica {
@@ -125,6 +129,10 @@ body{
     font-size: 25px;
     font-weight: 3px;
     padding-left: 10px;
+    text-decoration: none;
+}
+#nomeMeta:hover{
+    text-decoration:line-through;
 }
 
 #descrioneMeta {

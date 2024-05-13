@@ -13,7 +13,7 @@ function aggiungiMete(data) {
     for (let i = 0; i < data.length; i++) {
         var gita = document.createElement('div');
         gita.className = "gita"
-        gita.innerHTML = `<span id="nomeGita">${data[i].nome}</span>
+        gita.innerHTML = `<span id="nomeGita" onclick=eliminaGita(${data[i].id})>${data[i].nome}</span>
                         <span id="modifica" onclick="modificaEvento(${data[i].id})">modifica</span>
         <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona">`;
         gitaElement.appendChild(gita);
@@ -37,7 +37,7 @@ function aggiungiMete(data) {
             var metina = document.createElement('div');
             metina.className = 'metePiccole';
             metina.innerHTML = `<div class="inRiga">
-            <span id="nomeMeta">${data[i].tours[j].nome}</span>
+            <span id="nomeMeta" onclick="eliminaMeta(${data[i].tours[j].id})">${data[i].tours[j].nome}</span>
             <span id="dataMeta">Durata: ${data[i].tours[j].durata} giorni</span></div>
             <div class="bordino">
             <span id="descrioneMeta">${data[i].tours[j].descrizione}</span></div>
@@ -59,7 +59,7 @@ function disconnetti() {
     document.cookie = "UserConnesso=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.replace("./UserLogIn.php");
 }
-function prendiDati() {
+async function prendiDati() {
     try {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "../index.php/prendiGita", true);
@@ -72,9 +72,11 @@ function prendiDati() {
         };
         xhr.send();
     } catch (ex) { }
-
+}
+async function prendiDati2() {
     // questa cosa fa implodere tutto quanto 
     // aggiungi anche le mete dove sei stato aggiunto
+    await prendiDati();
     /*try {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "../index.php/rubaGite", true);
@@ -115,12 +117,22 @@ function aggiungiPart(num, si) {
         alert("Non puoi aggiungere più partecipanti");
     }
 }
-window.onload = () => {
-    prendiDati();
+window.onload = async () => {
+    await prendiDati2();
 }
-function aggiungiGita(){
- location.href();
+function eliminaMeta(id) {
+    if (window.confirm("Sicuro di voler eliminare questa meta?")) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `../index.php/eliminaMeta?id='${id}'`, true);
+        xhr.send();
+        window.location.href = "./homepage.html"
+    }
 }
-function aggiungiMeta(){
-
+function eliminaGita(id) {
+    if (window.confirm("Sicuro di voler eliminare questa gita e tutte le mete che comprende?")) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `../index.php/eliminaGita?id='${id}'`, true);
+        xhr.send();
+        window.location.href = "./homepage.html"
+    }
 }

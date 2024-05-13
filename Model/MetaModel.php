@@ -1,5 +1,7 @@
 <?php
-class MetaModel{private $db;
+class MetaModel
+{
+    private $db;
     private $idUtente;
     public function __construct()
     {
@@ -15,8 +17,9 @@ class MetaModel{private $db;
         $idU = $query->fetch(PDO::FETCH_OBJ);
         $this->idUtente = $idU->id;
     }
-    public function creaMeta($nome, $descrizione, $durata, $costo, $maxpart, $nomeGita){
-        
+    public function creaMeta($nome, $descrizione, $durata, $costo, $maxpart, $nomeGita)
+    {
+
         // trova fkMeta
         // Questo è da rivedere in quanto in questo modo non ci potrebbero essere più gite con lo stesso nome
         $query = $this->db->query("SELECT id FROM mete WHERE nome = '$nomeGita'");
@@ -37,5 +40,12 @@ class MetaModel{private $db;
 
         header("Location: ../View/homepage.html", true);
         exit();
+    }
+    public function eliminaMeta($id)
+    {
+        // elimina meta
+        $query = "DELETE FROM tour WHERE id = $id";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
     }
 }
