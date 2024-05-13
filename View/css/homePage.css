@@ -6,9 +6,11 @@ h1,
     font-weight: 70;
     font-size: 80px;
 }
-body{
+
+body {
     background-color: #E9E6FF;
 }
+
 .connessione {
     display: flex;
     justify-content: right;
@@ -48,6 +50,7 @@ body{
     justify-content: left;
     flex-direction: column;
 }
+
 .gita {
     border: 1px solid black;
     background-color: #3C4F76;
@@ -79,7 +82,8 @@ body{
     padding-left: 20px;
     text-decoration: none;
 }
-#nomeGita:hover{
+
+#nomeGita:hover {
     text-decoration: line-through;
 }
 
@@ -88,6 +92,29 @@ body{
     text-decoration: underline;
     padding-top: 10px;
     cursor: pointer;
+}
+
+.tastini {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #18265D;
+    height: fit-content
+}
+
+.tastini input {
+    padding: 10px;
+    background-color: #18265D;
+    border: 1px solid #E9E6FF;
+    border-top: 0px;
+    border-bottom: 0px;
+    color: #E9E6FF;
+    font-size: 22px;
+    font-family: "Alegreya Sans", sans-serif;
+    transition: 0.2s ease-out; 
+}
+.tastini input:hover{
+    background-color: #1b6bff;
 }
 
 /*Mete*/
@@ -116,6 +143,7 @@ body{
     align-items: center;
     border-bottom: 1px solid black;
 }
+
 .onRiga {
     display: flex;
     justify-content: space-between;
@@ -131,8 +159,9 @@ body{
     padding-left: 10px;
     text-decoration: none;
 }
-#nomeMeta:hover{
-    text-decoration:line-through;
+
+#nomeMeta:hover {
+    text-decoration: line-through;
 }
 
 #descrioneMeta {
@@ -141,13 +170,15 @@ body{
     font-size: 20px;
     font-weight: 3px;
 }
-.bordino{
+
+.bordino {
 
     padding-top: 20px;
     padding-bottom: 20px;
     padding-right: 15px;
     padding-left: 15px;
 }
+
 .aggiustaADestra {
     display: flex;
     justify-content: right;
@@ -155,7 +186,7 @@ body{
 
 .inMezzo {
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
 }
 
 #dataMeta {
@@ -184,17 +215,22 @@ body{
 }
 
 /*per il testo normale usare il font family "Alegreya Sans", sans-serif*/
-.colori{
-    color: #18265D; /*blue*/
-    color: #E9E6FF; /*BIanchino*/
-    color: #C06E52; /*Mattoncino*/
-    color: #B4ADEA; /*perry winkle*/
-    color: #d6ffb7; /*verdino*/
+.colori {
+    color: #18265D;
+    /*blue*/
+    color: #E9E6FF;
+    /*BIanchino*/
+    color: #C06E52;
+    /*Mattoncino*/
+    color: #B4ADEA;
+    /*perry winkle*/
+    color: #d6ffb7;
+    /*verdino*/
 }
 
 
 /* aggiungi meta e aggiungi gita */
-.contenitore{
+.contenitore {
     border: 1px solid #18265D;
     margin-left: 10%;
     padding: 10px;
@@ -206,10 +242,12 @@ body{
     align-items: center;
     background-color: #d5d2ee;
 }
-.inserimento{
+
+.inserimento {
     padding: 5px;
 }
-.inserimento input{
+
+.inserimento input {
     height: 50px;
     width: 400px;
     padding-left: 5px;
