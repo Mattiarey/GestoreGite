@@ -16,6 +16,26 @@ class MetaModel{private $db;
         $this->idUtente = $idU->id;
     }
     public function creaMeta($nome, $descrizione, $durata, $costo, $maxpart, $nomeGita){
+        
+        // trova fkMeta
+        // Questo è da rivedere in quanto in questo modo non ci potrebbero essere più gite con lo stesso nome
+        $query = $this->db->query("SELECT id FROM mete WHERE nome = '$nomeGita'");
+        $idMeta = $query->fetch(PDO::FETCH_OBJ);
 
+        // crea meta
+        $query = "INSERT INTO tour(nome, descrizione, durata, costo, fkMeta, maxPart) VALUES (:nome, :descrizione, :durata, :costo, :fkMeta, :maxPart)";
+        $statement = $this->db->prepare($query);
+
+        $statement->bindParam(':nome', $nome);
+        $statement->bindParam(':descrizione', $descrizione);
+        $statement->bindParam(':durata', $durata);
+        $statement->bindParam(':costo', $costo);
+        $statement->bindParam(':fkMeta', $idMeta->id);
+        $statement->bindParam(':maxPart', $maxpart);
+
+        $statement->execute();
+
+        header("Location: ../View/homepage.html", true);
+        exit();
     }
 }

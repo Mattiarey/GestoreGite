@@ -43,13 +43,14 @@ if ($request == "/GestoreGite/index.php/rubaGite") {
 
 
 // Meta
-if ($request == "/GestoreGite/index.php/aggiungiMeta"){
+$richiesta = explode("?", $request);
+if ($richiesta[0] == "/GestoreGite/index.php/aggiungiMeta"){
     $gitaController = new MetaController();
     $gitaController->aggiungiMeta();
 }
 
 // VISUALIZZAZIONE
-$richiesta = explode("?", $request);
+
 if ($richiesta[0] == "/GestoreGite/index.php/aggiungiTizio") {
     if ($_COOKIE['UserConnesso'] != $_GET['mail']) {
         $vsController = new VisualizzaController();

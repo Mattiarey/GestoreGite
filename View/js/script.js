@@ -73,8 +73,9 @@ function prendiDati() {
         xhr.send();
     } catch (ex) { }
 
+    // questa cosa fa implodere tutto quanto 
     // aggiungi anche le mete dove sei stato aggiunto
-    try {
+    /*try {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "../index.php/rubaGite", true);
         xhr.onreadystatechange = function () {
@@ -85,7 +86,7 @@ function prendiDati() {
             }
         };
         xhr.send();
-    } catch (ex) { }
+    } catch (ex) { }*/
 }
 function modificaEvento(num) {
     localStorage.setItem('idEvento', num);
