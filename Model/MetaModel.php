@@ -47,5 +47,9 @@ class MetaModel
         $query = "DELETE FROM tour WHERE id = $id";
         $statement = $this->db->prepare($query);
         $statement->execute();
+
+        $query = "DELETE FROM possonovedere WHERE fkTour = $id;";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
     }
 }

@@ -61,6 +61,7 @@ class GitaModel
         $query = "DELETE FROM mete WHERE id = $id;";
         $statement = $this->db->prepare($query);
         $statement->execute();
+
     }
     // funzione ottimizzabile ma funzionante
     // forse potevo fare semplicemente dei join nelle query -_-
