@@ -4,18 +4,21 @@ function rotateIcon(numero) {
 
     //aggiungiMete(icon[numero]);
 }
-function premi() {
-    aggiungiMete();
-}
 function aggiungiMete(data) {
     var gitaElement = document.getElementsByClassName('gitamete')[0];
 
     for (let i = 0; i < data.length; i++) {
         var gita = document.createElement('div');
         gita.className = "gita"
-        gita.innerHTML = `<span id="nomeGita" onclick=eliminaGita(${data[i].id})>${data[i].nome}</span>
+        gita.innerHTML = `<div class="sopra"><span id="nomeGita" onclick=eliminaGita(${data[i].id})>${data[i].nome}</span>
                         <span id="modifica" onclick="modificaEvento(${data[i].id})">modifica</span>
-        <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona">`;
+        <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona"></div><div class="descrizioneGita">
+        <div class="onRiga">
+            <span id="DataInizio">Inizio: ${data[i].data}</span>
+            <span id="Costo">Prezzo gita: ${data[i].costo}</span>
+        </div>
+        <span id="descrizioneGita">${data[i].descrizione}</span>
+    </div>`;
         gitaElement.appendChild(gita);
 
 

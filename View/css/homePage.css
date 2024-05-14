@@ -54,13 +54,17 @@ body {
 .gita {
     border: 1px solid black;
     background-color: #3C4F76;
-    height: 50px;
+    height: fit-content;
     width: 1200px;
     margin-left: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: #E9E6FF;
+    border-bottom: 0px;
+    padding-top: 5px;
+}
+.sopra{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
 }
 
 .icona {
@@ -117,6 +121,14 @@ body {
     background-color: #1b6bff;
 }
 
+.descrizioneGita{
+    font-family: "Alegreya Sans", sans-serif;
+    border-right: 0px;
+    color: #E9E6FF;
+    font-size: 20px;
+    font-weight: 5px;
+    padding: 10px;
+}
 /*Mete*/
 .mete {
     width: 1200px;
