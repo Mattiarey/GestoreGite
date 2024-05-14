@@ -25,7 +25,7 @@ function aggiungiMete(data) {
 
         var metaElement = document.getElementsByClassName('mete')[i];
         prezzoTot = 0;
-
+        prezzoTot += data[i].costo;
 
         // sarebbe carino caricare i tour ordinati per data, ma forse è meglio farlo dal backend
         for (let j = 0; j < data[i].tours.length; j++) {
@@ -38,7 +38,7 @@ function aggiungiMete(data) {
             metina.className = 'metePiccole';
             metina.innerHTML = `<div class="inRiga">
             <span id="nomeMeta" onclick="eliminaMeta(${data[i].tours[j].id})">${data[i].tours[j].nome}</span>
-            <span id="dataMeta">Durata: ${data[i].tours[j].durata} giorni</span></div>
+            <span id="dataMeta">Durata: ${data[i].tours[j].durata} minuti</span></div>
             <div class="bordino">
             <span id="descrioneMeta">${data[i].tours[j].descrizione}</span></div>
             <div class="onRiga">

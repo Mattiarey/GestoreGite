@@ -24,7 +24,7 @@ class VsModel
 
         // aggiungere fkMeta, idUtente, idMeta alla tabella possonovedere
 
-        $query = "INSERT INTO possonovedere(fkUtente, fkGita, fkTour, fkMeta) VALUES (:fkUtente, :fkGita, :fkTour)";
+        $query = "INSERT INTO possonovedere(fkUtente, fkGita, fkTour) VALUES (:fkUtente, :fkGita, :fkTour)";
         $statement = $this->db->prepare($query);
 
         $statement->bindParam(':fkUtente', $this->idUtente);

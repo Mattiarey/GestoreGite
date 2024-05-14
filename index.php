@@ -12,6 +12,10 @@ $richiesta = explode("?", $request);
 // USER
 //                /GestoreGite/index.php/registra
 // bisogna chiamare la cartella proprio GestoreGite
+if ($request == "/GestoreGite/index.php/" || $request == "/GestoreGite/index.php") {
+    header("Location: ../View/UserRegistration.php");
+    exit();
+}
 if ($request == "/GestoreGite/index.php/registra") {
     $userController = new UserController();
     $userController->createUser();
