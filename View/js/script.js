@@ -15,7 +15,7 @@ function aggiungiMete(data) {
         <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona"></div><div class="descrizioneGita">
         <div class="onRiga">
             <span id="DataInizio">Inizio: ${data[i].data}</span>
-            <span id="Costo">Prezzo gita: ${data[i].costo}</span>
+            <span id="Costo">Prezzo gita: €${data[i].costo}</span>
         </div>
         <span id="descrizioneGita">${data[i].descrizione}</span>
     </div>`;
