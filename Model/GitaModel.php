@@ -133,7 +133,7 @@ class GitaModel
         $gite = [];
 
         $meteDelBro = [];
-        // prendere tutte le mete dell'utente connesso
+        // prendere tutte le mete a cui partecipa l'utente
 
         $conn = new mysqli("localhost", "root", "", "gite");
         $sql = "SELECT fkGita FROM possonovedere WHERE fkUtente = '$this->idUtente'";
@@ -144,7 +144,7 @@ class GitaModel
                 $meteDelBro[] = $row['fkGita'];
             }
         }
-
+        $meteDelBro = array_values(array_unique($meteDelBro));
 
         //prendere mete della gita
 
@@ -192,6 +192,11 @@ class GitaModel
     }
 
 }
+/*
+SELECT * FROM possonovedere
+INNER JOIN mete on (mete.id = possonovedere.fkGita)
+INNER JOIN tour on (tour.id = possonovedere.fkTour)
+WHERE possonovedere.fkUtente = 90;*/
 /*
 $query = "DELETE FROM utenti WHERE email = :email AND password = :password";
             $statement = $this->db->prepare($query);

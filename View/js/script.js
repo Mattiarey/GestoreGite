@@ -5,6 +5,7 @@ function rotateIcon(numero) {
     //aggiungiMete(icon[numero]);
 }
 function aggiungiMete(data) {
+    // si bugga perché non metto in coda i risultati, ma li aggiungo usando questo indice
     var gitaElement = document.getElementsByClassName('gitamete')[0];
 
     for (let i = 0; i < data.length; i++) {
@@ -80,7 +81,7 @@ async function prendiDati2() {
     // questa cosa fa implodere tutto quanto 
     // aggiungi anche le mete dove sei stato aggiunto
     await prendiDati();
-    /*try {
+    try {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "../index.php/rubaGite", true);
         xhr.onreadystatechange = function () {
@@ -91,7 +92,7 @@ async function prendiDati2() {
             }
         };
         xhr.send();
-    } catch (ex) { }*/
+    } catch (ex) { }
 }
 function modificaEvento(num) {
     localStorage.setItem('idEvento', num);
