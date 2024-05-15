@@ -110,4 +110,21 @@ class UserModel
         $query = $this->db->query("SELECT isAdmin FROM utenti WHERE email = '$mailBro'");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function mostraTutti(){
+        $mailBro = $_COOKIE["UserConnesso"];
+        $query = $this->db->query("SELECT * FROM utenti WHERE NOT email = '$mailBro'");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function modificaUser($id, $new_nome, $new_cognome, $new_email, $new_password, $new_isAdmin){
+        
+        $numerino = 0;
+        if($new_isAdmin == "on") $numerino = 1;
+        else $numerino = 0;
+        
+        // Query di aggiornamento
+        $query = "UPDATE utenti SET nome = '$new_nome', cognome = '$new_cognome', email = '$new_email', password = '$new_password', isAdmin = '$numerino' WHERE id = $id";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        header("Location: ../View/gestisciUtenti.html", true);
+    }
 }

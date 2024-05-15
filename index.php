@@ -30,6 +30,17 @@ if ($request == "/GestoreGite/index.php/isAdmin") {
     header('Content-Type: application/json');
     echo json_encode($result);
 }
+if ($request == "/GestoreGite/index.php/mostraTutto") {
+    $userController = new UserController();
+    $result = $userController->sonoAdmin();
+    header('Content-Type: application/json');
+    echo json_encode($result);
+}
+if ($richiesta[0] == "/GestoreGite/index.php/modifica") {
+    $userController = new UserController();
+    $userController->modificaUser($_GET['id']);
+}
+
 
 // GITA
 if ($request == "/GestoreGite/index.php/aggiungiGita") {
