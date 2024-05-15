@@ -1,0 +1,89 @@
+.head {
+    /*border: 1px solid #ccc;*/
+    height: 250px;
+    background-color: #18265D;
+    margin-bottom: 100px;
+    color: #E9E6FF;
+    margin-top: -10px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.connessione {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 30px;
+    /*border: 1px solid #ccc;*/
+}
+
+.connessione a {
+    text-decoration: underline;
+    font-family: "Exo 2", sans-serif;
+    font-weight: 550;
+    cursor: pointer;
+}
+h1,
+#titolo {
+    text-align: center;
+    font-family: "Exo 2", sans-serif;
+    font-style: normal;
+    font-weight: 70;
+    font-size: 80px;
+}
+#userImage {
+    width: 20px;
+    padding-left: 5px;
+}
+.tastini {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #18265D;
+    height: fit-content
+}
+
+.tastini input {
+    padding: 10px;
+    background-color: #18265D;
+    border: 1px solid #E9E6FF;
+    border-top: 0px;
+    border-bottom: 0px;
+    color: #E9E6FF;
+    font-size: 22px;
+    font-family: "Alegreya Sans", sans-serif;
+    transition: 0.2s ease-out; 
+}
+.tastini input:hover{
+    background-color: #1b6bff;
+}
+.listaUtenti{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    background-color: #d5d2ee;
+}
+.sotto{
+    display: flex;
+    justify-content: flex-end;
+}
+.utente{
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-family: "Alegreya Sans", sans-serif;
+    background-color: #3C4F76;
+    color: #E9E6FF;
+}
+.centra{
+    display: flex;
+    justify-content: center;
+}
+input[type="text"], input[type="mail"] {
+    height: 40px;
+    font-size: 18px;
+    background-color: #d5d2ee;
+}
+.intermezzo{
+    height: 5px;
+}

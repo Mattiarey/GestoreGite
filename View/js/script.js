@@ -193,6 +193,6 @@ function AdminView() {
 }
 function modificaUtenti(){
     var tastiElement = document.getElementsByClassName('tastini')[0];
-    stringa = '<a href="./gestisciUtenti.php"><input type="button" value="Gestisti utenti"></a>'
+    stringa = '<a href="./gestisciUtenti.html"><input type="button" value="Gestisti utenti"></a>'
     tastiElement.innerHTML += stringa;
 }
