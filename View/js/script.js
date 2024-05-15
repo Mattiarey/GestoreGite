@@ -4,30 +4,35 @@ function rotateIcon(numero) {
 
     //aggiungiMete(icon[numero]);
 }
-function aggiungiMete(data) {
+function aggiungiMete(data, owner = true) {
     // si bugga perché non metto in coda i risultati, ma li aggiungo usando questo indice
     var gitaElement = document.getElementsByClassName('gitamete')[0];
-
+    var stringaHTML = "";
     for (let i = 0; i < data.length; i++) {
-        var gita = document.createElement('div');
-        gita.className = "gita"
-        gita.innerHTML = `<div class="sopra"><span id="nomeGita" onclick=eliminaGita(${data[i].id})>${data[i].nome}</span>
-                        <span id="modifica" onclick="modificaEvento(${data[i].id})">modifica</span>
+        if (owner) {
+            var gita = `<div class="gita"><div class="sopra"><span id="nomeGita" onclick=eliminaGita(${data[i].id})>${data[i].nome}</span>
+            <span id="modifica" onclick="modificaEvento(${data[i].id})">modifica</span>
+<img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona"></div><div class="descrizioneGita">
+<div class="onRiga">
+<span id="DataInizio">Inizio: ${data[i].data}</span>
+<span id="Costo">Prezzo gita: €${data[i].costo}</span>
+</div>
+<span id="descrizioneGita">${data[i].descrizione}</span>
+</div></div>
+<div class="mete">`;
+        } else {
+            var gita = `<div class="gita"><div class="sopra"><span id="nomeGitaN">${data[i].nome}</span>
         <img src="./images/freccinaBianca.png" onclick="rotateIcon(${i})" alt="+" class="icona"></div><div class="descrizioneGita">
         <div class="onRiga">
             <span id="DataInizio">Inizio: ${data[i].data}</span>
             <span id="Costo">Prezzo gita: €${data[i].costo}</span>
         </div>
         <span id="descrizioneGita">${data[i].descrizione}</span>
-    </div>`;
-        gitaElement.appendChild(gita);
+    </div></div>
+    <div class="mete">`;
+        }
 
-
-        var meta = document.createElement('div');
-        meta.className = 'mete';
-        gitaElement.appendChild(meta);
-
-        var metaElement = document.getElementsByClassName('mete')[i];
+        stringaHTML += gita;
         prezzoTot = 0;
         prezzoTot += data[i].costo;
 
@@ -37,26 +42,37 @@ function aggiungiMete(data) {
 
             canPartecipate = false;
             if (data[i].tours[j].partAtt < data[i].tours[j].maxPart) canPartecipate = true;
-
-            var metina = document.createElement('div');
-            metina.className = 'metePiccole';
-            metina.innerHTML = `<div class="inRiga">
-            <span id="nomeMeta" onclick="eliminaMeta(${data[i].tours[j].id})">${data[i].tours[j].nome}</span>
+            if(owner){
+                var metina = `<div class="metePiccole"><div class="inRiga">
+                <span id="nomeMeta" onclick="eliminaMeta(${data[i].tours[j].id})">${data[i].tours[j].nome}</span>
+                <span id="dataMeta">Durata: ${data[i].tours[j].durata} minuti</span></div>
+                <div class="bordino">
+                <span id="descrioneMeta">${data[i].tours[j].descrizione}</span></div>
+                <div class="onRiga">
+                <span id="maxpart">Partecipanti: ${data[i].tours[j].partAtt}/${data[i].tours[j].maxPart}</span>
+                <span id="costoMeta">€${data[i].tours[j].costo}</span></div>
+                <div class="inMezzo"><span id="modifica" onclick="modificaTour(${data[i].tours[j].id})">modifica</span>
+                <span id="modifica" onclick="aggiungiPart(${data[i].tours[j].id}, ${canPartecipate})">Aggiungi Partecipanti</span></div></div>`;
+                stringaHTML += metina;
+            }else{
+                var metina = `<div class="metePiccole"><div class="inRigaN">
+            <span id="nomeMeta"">${data[i].tours[j].nome}</span>
             <span id="dataMeta">Durata: ${data[i].tours[j].durata} minuti</span></div>
             <div class="bordino">
             <span id="descrioneMeta">${data[i].tours[j].descrizione}</span></div>
             <div class="onRiga">
             <span id="maxpart">Partecipanti: ${data[i].tours[j].partAtt}/${data[i].tours[j].maxPart}</span>
             <span id="costoMeta">€${data[i].tours[j].costo}</span></div>
-            <div class="inMezzo"><span id="modifica" onclick="modificaTour(${data[i].tours[j].id})">modifica</span>
-            <span id="modifica" onclick="aggiungiPart(${data[i].tours[j].id}, ${canPartecipate})">Aggiungi Partecipanti</span></div>`;
-            metaElement.appendChild(metina);
+            <div class="inMezzo">
+            </div></div>`;
+            stringaHTML += metina;
+            }
+            
         }
-        var costoTot = document.createElement('div');
-        costoTot.className = 'aggiustaADestra';
-        costoTot.innerHTML = ` <span id="costoTotale">Costo totale gita "${data[i].nome}": €${prezzoTot}</span>
-        <!--Mappa infinita pazzesca che unisce tutte le mete-->`;
-        metaElement.appendChild(costoTot);
+        var costoTot = `<div class="aggiustaADestra"><span id="costoTotale">Costo totale gita "${data[i].nome}": €${prezzoTot}</span>
+        <!--Mappa infinita pazzesca che unisce tutte le mete--></div></div>`;
+        stringaHTML += costoTot;
+        gitaElement.innerHTML += stringaHTML
     }
 }
 function disconnetti() {
@@ -88,7 +104,7 @@ async function prendiDati2() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var data = JSON.parse(xhr.responseText);
                 console.log(data);
-                aggiungiMete(data);
+                aggiungiMete(data, false);
             }
         };
         xhr.send();

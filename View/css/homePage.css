@@ -86,7 +86,13 @@ body {
     padding-left: 20px;
     text-decoration: none;
 }
-
+#nomeGitaN {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 35px;
+    font-weight: 5px;
+    padding-left: 20px;
+    text-decoration: none;
+}
 #nomeGita:hover {
     text-decoration: line-through;
 }
@@ -171,7 +177,13 @@ body {
     padding-left: 10px;
     text-decoration: none;
 }
-
+#nomeMetaN {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 25px;
+    font-weight: 3px;
+    padding-left: 10px;
+    text-decoration: none;
+}
 #nomeMeta:hover {
     text-decoration: line-through;
 }
