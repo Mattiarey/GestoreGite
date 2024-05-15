@@ -32,6 +32,11 @@ class UserController {
     public function updateUser(){
         // modifica
     }
+    public function isAdmin(){
+        $userModel = new UserModel();
+        $valore = $userModel->isAdmin();
+        return $valore;
+    }
 
 
 

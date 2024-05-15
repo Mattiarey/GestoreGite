@@ -24,6 +24,12 @@ if ($request == "/GestoreGite/index.php/login") {
     $userController = new UserController();
     $userController->checkUser();
 }
+if ($request == "/GestoreGite/index.php/isAdmin") {
+    $userController = new UserController();
+    $result = $userController->isAdmin();
+    header('Content-Type: application/json');
+    echo json_encode($result);
+}
 
 // GITA
 if ($request == "/GestoreGite/index.php/aggiungiGita") {
@@ -43,6 +49,12 @@ if ($request == "/GestoreGite/index.php/prendiGita") {
 if ($request == "/GestoreGite/index.php/rubaGite") {
     $gitaController = new GitaController();
     $result = $gitaController->rubaGite();
+    header('Content-Type: application/json');
+    echo json_encode($result);
+}
+if ($request == "/GestoreGite/index.php/sonoAdmin") {
+    $gitaController = new GitaController();
+    $result = $gitaController->sonoAmministrazione();
     header('Content-Type: application/json');
     echo json_encode($result);
 }

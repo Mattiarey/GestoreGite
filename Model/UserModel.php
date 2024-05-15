@@ -49,8 +49,7 @@ class UserModel
 
                 header("Location: ../View/homepage.html", true);
                 exit();
-            }
-            else{
+            } else {
                 $valore = "Utente già esistente";
                 header("Location: ../View/UserRegistration.php", true);
                 exit();
@@ -82,7 +81,7 @@ class UserModel
         try {
             $query = $this->db->query("SELECT * FROM utenti WHERE email = '$email' AND password = '$password'");
 
-            
+
             $user = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if ($user) {
@@ -104,5 +103,11 @@ class UserModel
             header("Location: ../View/UserLogin.php", true);
             return $valore;
         }
+    }
+    public function isAdmin()
+    {
+        $mailBro = $_COOKIE["UserConnesso"];
+        $query = $this->db->query("SELECT isAdmin FROM utenti WHERE email = '$mailBro'");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }

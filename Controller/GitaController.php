@@ -23,6 +23,11 @@ class GitaController
         $result = $gitaModel->rubaGite();
         return $result;
     }
+    public function sonoAmministrazione(){
+        $gitaModel = new GitaModel();
+        $result = $gitaModel->sonoAdmin();
+        return $result;
+    }
 
     // Per capire
     private function ProvaggiungiGita()

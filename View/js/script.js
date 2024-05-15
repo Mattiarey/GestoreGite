@@ -8,8 +8,8 @@ function aggiungiMete(data, owner = true) {
     // si bugga perché non metto in coda i risultati, ma li aggiungo usando questo indice
     var gitaElement = document.getElementsByClassName('gitamete')[0];
     for (let i = 0; i < data.length; i++) {
-        
-    var stringaHTML = "";
+
+        var stringaHTML = "";
         if (owner) {
             var gita = `<div class="gita"><div class="sopra"><span id="nomeGita" onclick=eliminaGita(${data[i].id})>${data[i].nome}</span>
                         <span id="modifica" onclick="modificaEvento(${data[i].id})">modifica</span>
@@ -43,7 +43,7 @@ function aggiungiMete(data, owner = true) {
 
             canPartecipate = false;
             if (data[i].tours[j].partAtt < data[i].tours[j].maxPart) canPartecipate = true;
-            if(owner){
+            if (owner) {
                 var metina = `<div class="metePiccole"><div class="inRiga">
                               <span id="nomeMeta" onclick="eliminaMeta(${data[i].tours[j].id})">${data[i].tours[j].nome}</span>
                               <span id="dataMeta">Durata: ${data[i].tours[j].durata} minuti</span></div>
@@ -55,7 +55,7 @@ function aggiungiMete(data, owner = true) {
                               <div class="inMezzo"><span id="modifica" onclick="modificaTour(${data[i].tours[j].id})">modifica</span>
                               <span id="modifica" onclick="aggiungiPart(${data[i].tours[j].id}, ${canPartecipate})">Aggiungi Partecipanti</span></div></div>`;
                 stringaHTML += metina;
-            }else{
+            } else {
                 var metina = `<div class="metePiccole"><div class="inRigaN">
                               <span id="nomeMeta"">${data[i].tours[j].nome}</span>
                               <span id="dataMeta">Durata: ${data[i].tours[j].durata} minuti</span></div>
@@ -66,9 +66,9 @@ function aggiungiMete(data, owner = true) {
                               <span id="costoMeta">€${data[i].tours[j].costo}</span></div>
                               <div class="inMezzo">
                               </div></div>`;
-            stringaHTML += metina;
+                stringaHTML += metina;
             }
-            
+
         }
         var costoTot = `<div class="aggiustaADestra"><span id="costoTotale">Costo totale gita "${data[i].nome}": €${prezzoTot}</span>
                         <!--Mappa infinita pazzesca che unisce tutte le mete--></div></div>`;
@@ -139,7 +139,28 @@ function aggiungiPart(num, si) {
     }
 }
 window.onload = async () => {
-    await prendiDati2();
+    valore = await isAdmin();
+    if (valore == 0) {
+        await prendiDati2();
+    } else {
+        // se sei amministratore
+        await AdminView();
+    }
+
+}
+async function isAdmin() {
+    valore = 0;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", `../index.php/isAdmin`, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            valore = data[0]["isAdmin"];
+            console.log(valore);
+            return valore;
+        }
+    };
+    xhr.send();
 }
 function eliminaMeta(id) {
     if (window.confirm("Sicuro di voler eliminare questa meta?")) {
@@ -156,4 +177,22 @@ function eliminaGita(id) {
         xhr.send();
         window.location.href = "./homepage.html"
     }
+}
+function AdminView() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "../index.php/sonoAdmin", true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            console.log(data);
+            aggiungiMete(data, true);
+            modificaUtenti();
+        }
+    };
+    xhr.send();
+}
+function modificaUtenti(){
+    var tastiElement = document.getElementsByClassName('tastini')[0];
+    stringa = '<a href="./gestisciUtenti.php"><input type="button" value="Gestisti utenti"></a>'
+    tastiElement.innerHTML += stringa;
 }
