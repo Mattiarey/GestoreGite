@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/homePage.css">
+    <link rel="stylesheet" href="./css/admin.css">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,18 +18,23 @@
         rel="stylesheet">
 
     <!--Fine font-->
-    <script src="./js/Evento.js"></script>
-    <title>Modifica evento</title>
+    <script src="./js/modificaGita.js"></script>
+    <title>Modifica Gita</title>
 </head>
 
 <body>
     <div class="head">
         <div class="connessione">
+            <a onclick="disconnetti()">connesso</a>
+            <img src="../View/images/userBianco.png" alt="immagine utente" id="userImage">
         </div>
-        <h1 id="titolo">Modifica Evento</h1>
+        <h1 id="titolo">Modifica Gita</h1>
+        <div class="tastini">
+            <a href="./homepage.html"><input type="button" value="Indietro"></a>
+        </div>
     </div>
-    <div class="corpo">
-        <div class="gitamete">
+    <div class="centra">
+        <div class="listaUtenti">
         </div>
     </div>
 </body>

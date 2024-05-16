@@ -17,12 +17,6 @@ class UserController
         $messaggio = $userModel->checkUser($_POST['email'], $_POST['password']);
         echo "<script>console.log('$messaggio');</script>";
     }
-    public function deleteUser()
-    {
-        // eliminazione
-        $userModel = new UserModel();
-        $userModel->eliminaUser($_POST['email'], $_POST['password']);
-    }
     public function modificaUser($id)
     {
         $userModel = new UserModel();
@@ -41,23 +35,11 @@ class UserController
         $valore = $userModel->mostraTutti();
         return $valore;
     }
-
-
-
-    // TEST VARI
-    public function aggiungiGino()
+    public function eliminaUser($id)
     {
         $userModel = new UserModel();
-        $userModel->createUser("Gino", "Carlo", "ginoCarlo@virgilio.it", "1234", "1");
+        $userModel->eliminaUser($id);
     }
-    public function cercaGino()
-    {
-        $userModel = new UserModel();
-        $userModel->checkUser("ginoCarlo@virgilio.it", "1234");
-    }
-    public function eliminaGino()
-    {
-        $userModel = new UserModel();
-        $userModel->eliminaUser("ginoCarlo@virgilio.it", "1234");
-    }
+
+
 }

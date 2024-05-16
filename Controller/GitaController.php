@@ -28,12 +28,14 @@ class GitaController
         $result = $gitaModel->sonoAdmin();
         return $result;
     }
-
-    // Per capire
-    private function ProvaggiungiGita()
+    public function mostraGitina(){
+        $gitaModel = new GitaModel();
+        $value = $gitaModel->mostraGitina($_GET['id']);
+        return $value;
+    }
+    public function modificaGita()
     {
         $gitaModel = new GitaModel();
-        //                                                                     anno/mese/giorno
-        $gitaModel->creaGita("Pizzo Calabro", "Un bellissimo posto in Calabria", "03/02/24", 25);
+        $gitaModel->modificaGita($_GET['id'], $_POST['nome'], $_POST['descrizione'], $_POST['data'], $_POST['costo']);
     }
 }

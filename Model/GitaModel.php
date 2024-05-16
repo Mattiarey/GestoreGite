@@ -1,4 +1,3 @@
-
 <?php
 require_once ("class/gitameta.php");
 class GitaModel
@@ -134,15 +133,17 @@ class GitaModel
         $gite = [];
 
         $meteDelBro = [];
+        $giteDelBro = [];
         // prendere tutte le mete a cui partecipa l'utente
 
         $conn = new mysqli("localhost", "root", "", "gite");
-        $sql = "SELECT fkGita FROM possonovedere WHERE fkUtente = '$this->idUtente'";
+        $sql = "SELECT fkGita, fkTour FROM possonovedere WHERE fkUtente = '$this->idUtente'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $meteDelBro[] = $row['fkGita'];
+                $giteDelBro[] = $row['fkTour'];
             }
         }
         $meteDelBro = array_values(array_unique($meteDelBro));
@@ -155,32 +156,36 @@ class GitaModel
         for ($i = 0; $i < $lughezza; $i++) {
             // prendi tutte le mete
             $idMeta = $meteDelBro[$i];
+
             $query = $this->db->query("SELECT * FROM mete WHERE id = '$idMeta'");
             $gite[] = $query->fetch(PDO::FETCH_OBJ);
 
         }
         // questo array contiene un array che contiene i tour per meta
         $tourPerMeta = array();
+        $lunghezzina = count((array) $giteDelBro);
         for ($i = 0; $i < $lughezza; $i++) {
             // prendi tutti i tour
             $fkMeta = $meteDelBro[$i];
-            $query = $this->db->query("SELECT * FROM tour WHERE fkMeta = '$fkMeta'");
-            $tour = $query->fetch(PDO::FETCH_OBJ);
-
-            $conn = new mysqli("localhost", "root", "", "gite");
-            $sql = "SELECT * FROM tour WHERE fkMeta = '$fkMeta'";
-            $result = $conn->query($sql);
-
-
             $tourVari = array();
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $tour = $row;
-                    $tourVari[] = new Tour($tour['id'], $tour['nome'], $tour['descrizione'], $tour['durata'], $tour['costo'], $tour['fkMeta'], $tour['maxPart'], $tour['partAttuali']);
+            for ($j = 0; $j < $lunghezzina; $j++) {
+                $idTour = $giteDelBro[$j];
+                $conn = new mysqli("localhost", "root", "", "gite");
+                $sql = "SELECT * FROM tour WHERE fkMeta = '$fkMeta' AND id = '$idTour'";
+                $result = $conn->query($sql);
+
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $tour = $row;
+                        $tourVari[] = new Tour($tour['id'], $tour['nome'], $tour['descrizione'], $tour['durata'], $tour['costo'], $tour['fkMeta'], $tour['maxPart'], $tour['partAttuali']);
+                    }
+
                 }
 
             }
             $tourPerMeta[] = $tourVari;
+
 
         }
         $veraGita = array();
@@ -253,6 +258,30 @@ class GitaModel
         }
         return $veraGita;
 
+    }
+    public function mostraGitina($id){
+        $conn = new mysqli("localhost", "root", "", "gite");
+        $query = "SELECT * FROM mete WHERE id = $id";
+        $result = $conn->query($query);
+        $gite = [];
+            if ($result->num_rows > 0) {
+                while ($gita = $result->fetch_assoc()) {
+                    $gite[] = $gita;
+                }
+
+            }
+        return json_encode($gite);
+    }
+    public function modificaGita($id, $new_nome, $new_descrizione, $new_data, $new_costo)
+    {
+
+
+        // Query di aggiornamento
+        $query = "UPDATE mete SET nome = '$new_nome', descrizione = '$new_descrizione', data = '$new_data', costo = '$new_costo' WHERE id = $id";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        header("Location: ../View/modificaGita.html", true);
+        exit();
     }
 
 }

@@ -40,6 +40,10 @@ if ($richiesta[0] == "/GestoreGite/index.php/modifica") {
     $userController = new UserController();
     $userController->modificaUser($_GET['id']);
 }
+if ($richiesta[0] == "/GestoreGite/index.php/elimina") {
+    $userController = new UserController();
+    $userController->eliminaUser($_GET['id']);
+}
 
 
 // GITA
@@ -68,6 +72,16 @@ if ($request == "/GestoreGite/index.php/sonoAdmin") {
     $result = $gitaController->sonoAmministrazione();
     header('Content-Type: application/json');
     echo json_encode($result);
+}
+if ($richiesta[0]  == "/GestoreGite/index.php/mostraGitina") {
+    $gitaController = new GitaController();
+    $value = $gitaController->mostraGitina();
+    header('Content-Type: application/json');
+    echo $value;
+}
+if ($richiesta[0]  == "/GestoreGite/index.php/modificaGita") {
+    $gitaController = new GitaController();
+    $gitaController->modificaGita();
 }
 
 

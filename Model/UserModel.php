@@ -60,20 +60,13 @@ class UserModel
         }
         return $valore;
     }
-    public function eliminaUser($email, $password)
+    public function eliminaUser($id)
     {
-        try {
-            $query = "DELETE FROM utenti WHERE email = :email AND password = :password";
-            $statement = $this->db->prepare($query);
-
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':password', $password);
-
-            $statement->execute();
-            echo "<script>console.log('Utente cancellato');</script>";
-        } catch (PDOException $e) {
-            echo "<script>console.log('Error: " . $e->getMessage() . "');</script>";
-        }
+        $query = "DELETE FROM utenti WHERE id = $id";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        header("Location: ../View/gestisciUtenti.html", true);
+        exit();
     }
     public function checkUser($email, $password)
     {
@@ -110,21 +103,28 @@ class UserModel
         $query = $this->db->query("SELECT isAdmin FROM utenti WHERE email = '$mailBro'");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function mostraTutti(){
+    public function mostraTutti()
+    {
         $mailBro = $_COOKIE["UserConnesso"];
+        // non puoi modificare il tuo stesso profilo, in questo modo ci sarà sempre almeno un admin
         $query = $this->db->query("SELECT * FROM utenti WHERE NOT email = '$mailBro'");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function modificaUser($id, $new_nome, $new_cognome, $new_email, $new_password, $new_isAdmin){
-        
+    public function modificaUser($id, $new_nome, $new_cognome, $new_email, $new_password, $new_isAdmin)
+    {
+
         $numerino = 0;
-        if($new_isAdmin == "on") $numerino = 1;
-        else $numerino = 0;
-        
+        if ($new_isAdmin == "on")
+            $numerino = 1;
+        else
+            $numerino = 0;
+
         // Query di aggiornamento
         $query = "UPDATE utenti SET nome = '$new_nome', cognome = '$new_cognome', email = '$new_email', password = '$new_password', isAdmin = '$numerino' WHERE id = $id";
         $statement = $this->db->prepare($query);
         $statement->execute();
         header("Location: ../View/gestisciUtenti.html", true);
+        exit();
     }
+    
 }

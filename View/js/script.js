@@ -113,7 +113,7 @@ async function prendiDati2() {
 }
 function modificaEvento(num) {
     localStorage.setItem('idEvento', num);
-    window.location.href = "./modificaEvento.php"
+    window.location.href = "./modificaGita.html"
 }
 function modificaTour(num) {
     localStorage.setItem('idTour', num);
@@ -138,16 +138,8 @@ function aggiungiPart(num, si) {
         alert("Non puoi aggiungere più partecipanti");
     }
 }
-window.onload = async () => {
-    valore = await isAdmin();
-    if (await valore == 0) {
-        await prendiDati2();
-    } else {
-        // se sei amministratore
-        await AdminView();
-    }
+window.onload = isAdmin();
 
-}
 async function isAdmin() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", `../index.php/isAdmin`, true);
@@ -155,8 +147,12 @@ async function isAdmin() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var data = JSON.parse(xhr.responseText);
             valore = data[0]["isAdmin"];
-            console.log(valore);
-            return valore;
+            if ( valore == 0) {
+                 prendiDati2();
+            } else {
+                // se sei amministratore
+                 AdminView();
+            }
         }
     };
      xhr.send();
