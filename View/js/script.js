@@ -140,7 +140,7 @@ function aggiungiPart(num, si) {
 }
 window.onload = async () => {
     valore = await isAdmin();
-    if (valore == 0) {
+    if (await valore == 0) {
         await prendiDati2();
     } else {
         // se sei amministratore
@@ -149,7 +149,6 @@ window.onload = async () => {
 
 }
 async function isAdmin() {
-    valore = 0;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", `../index.php/isAdmin`, true);
     xhr.onreadystatechange = function () {
@@ -160,7 +159,7 @@ async function isAdmin() {
             return valore;
         }
     };
-    xhr.send();
+     xhr.send();
 }
 function eliminaMeta(id) {
     if (window.confirm("Sicuro di voler eliminare questa meta?")) {
