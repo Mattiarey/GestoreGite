@@ -117,7 +117,7 @@ function modificaEvento(num) {
 }
 function modificaTour(num) {
     localStorage.setItem('idTour', num);
-    window.location.href = "./modificaTour.php"
+    window.location.href = "./modificaTour.html"
 }
 function aggiungiPart(num, si) {
     if (si) {

@@ -52,4 +52,28 @@ class MetaModel
         $statement = $this->db->prepare($query);
         $statement->execute();
     }
+    public function mostraMetina($id){
+        $conn = new mysqli("localhost", "root", "", "gite");
+        $query = "SELECT * FROM tour WHERE id = $id";
+        $result = $conn->query($query);
+        $gite = [];
+            if ($result->num_rows > 0) {
+                while ($gita = $result->fetch_assoc()) {
+                    $gite[] = $gita;
+                }
+
+            }
+        return json_encode($gite);
+    }
+    public function modificaMeta($id, $new_nome, $new_descrizione, $new_durata, $new_costo, $new_maxPart)
+    {
+
+
+        // Query di aggiornamento
+        $query = "UPDATE tour SET nome = '$new_nome', descrizione = '$new_descrizione', durata = '$new_durata', costo = '$new_costo', maxPart = '$new_maxPart' WHERE id = $id";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        header("Location: ../View/modificaTour.html", true);
+        exit();
+    }
 }

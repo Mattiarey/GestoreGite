@@ -94,6 +94,16 @@ if ($richiesta[0] == "/GestoreGite/index.php/eliminaMeta") {
     $metaController = new MetaController();
     $metaController->eliminaMeta();
 }
+if ($richiesta[0]  == "/GestoreGite/index.php/mostraMetina") {
+    $gitaController = new MetaController();
+    $value = $gitaController->mostraMetina();
+    header('Content-Type: application/json');
+    echo $value;
+}
+if ($richiesta[0]  == "/GestoreGite/index.php/modificaMeta") {
+    $gitaController = new MetaController();
+    $gitaController->modificaMeta();
+}
 
 // VISUALIZZAZIONE
 
